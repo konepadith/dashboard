@@ -1,1 +1,33 @@
-<p>sidebar works!</p>
+<mat-nav-list>
+  <div class="profile-card">
+    <div class="header">
+      <h3>Kone Spydee</h3>
+      <h4>example@gmail.com</h4>
+    </div>
+    <img src="https://images.pexels.com/photos/9657449/pexels-photo-9657449.jpeg?cs=srgb&dl=pexels-serhii-volyk-9657449.jpg&fm=jpg" alt="kone spydee">
+  </div>
+  <mat-divider></mat-divider>
+
+  <h2 matSubheader>Pages</h2>
+
+  <a mat-list-item routerLinkActive="router-link-active" routerLink="/">Dashboard</a>
+  <a mat-list-item routerLinkActive="router-link-active" routerLink="/posts">Posts</a>
+  <a mat-list-item routerLinkActive="router-link-active" routerLink="/article">Article</a>
+
+  <mat-divider></mat-divider>
+
+  <h2 matSubheader>Tools</h2>
+
+  <a mat-list-item routerLinkActive="router-link-active" routerLink="/contacts">
+    <mat-icon>import_contacts</mat-icon>
+    constacts
+  </a>
+
+  <a mat-list-item routerLinkActive="router-link-active" routerLink="/contacts">
+    <mat-icon>phone</mat-icon>
+    leads
+  </a>
+
+
+</mat-nav-list>
+
