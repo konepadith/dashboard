@@ -28,10 +28,10 @@ export class AreaComponent implements OnInit {
           valueSuffix: ' millions'
       },
       credits:{
-        enable:false
+        enabled:false
       },
       exporting:{
-        enable:true
+        enabled:true
       },
       series: [{
           name: 'Asia',
