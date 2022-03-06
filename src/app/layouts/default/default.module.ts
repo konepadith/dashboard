@@ -12,12 +12,16 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { DashboardService } from 'src/app/modules/dashboard.service';
-
+import { MailComponent } from 'src/app/modules/mail/mail.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { NgxSpinnerModule } from 'ngx-spinner';
 @NgModule({
   declarations: [
     DefaultComponent,
     DashboardComponent,
-    PostsComponent
+    PostsComponent,
+    MailComponent,
   ],
   imports: [
     CommonModule,
@@ -28,7 +32,11 @@ import { DashboardService } from 'src/app/modules/dashboard.service';
     MatCardModule,
     FlexLayoutModule,
     MatPaginatorModule,
-    MatTableModule
+    MatTableModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgxSpinnerModule,
   ],
   providers:[
     DashboardService

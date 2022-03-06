@@ -52,7 +52,6 @@ export class DashboardComponent implements OnInit {
     this.bigChart = this.dashboard.bigChart();
     this.cards = this.dashboard.cards();
     this.pieChart=this.dashboard.pieChart();
-
     this.dataSource.paginator = this.paginator;
   }
 

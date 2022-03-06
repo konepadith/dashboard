@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 
+import { HttpClient } from '@angular/common/http';
+
 @Injectable({
   providedIn: 'root'
 })
 export class DashboardService {
 
-  constructor() { }
+  constructor(private http : HttpClient) { }
   bigChart(){
     return [{
       name: 'Asia',
@@ -24,7 +26,6 @@ export class DashboardService {
       data: [2, 2, 2, 6, 13, 30, 46]
   }]
   }
-
   cards(){
     return [71,78,39,66]
   }
@@ -59,5 +60,13 @@ export class DashboardService {
       name: 'Other',
       y: 2.61
   }]
+  }
+  mail(data:any){
+    const url ='http://localhost:3000/mailing'
+    return this.http.post<any>(url,data)
+  }
+  receive(){
+    const url = 'http://localhost:3000/show_mail'
+    return this.http.get<any>(url)
   }
 }

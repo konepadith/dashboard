@@ -1,0 +1,31 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "default" color = "#fff" type = "square-jelly-box" [fullScreen] = "true"><p style="color: white" >Sending</p></ngx-spinner>
+<div class="row">
+  <div class="col-sm-5">
+    <h4>Sending Email</h4>
+    <form class="example-form" [formGroup]="mail" (ngSubmit)="send()">
+      <div class="mb-3">
+        <label for="user_email" class="col-form-label">Send to</label>
+        <input [ngClass]="{ 'is-invalid':  m.emailto.invalid && m.emailto.touched }" type="text" class="form-control" id="emailto" formControlName="emailto">
+        <small class="p-error text-danger" *ngIf="m.emailto.hasError('required') &&m.emailto.invalid && m.emailto.touched">Email is require</small>
+        <small class="p-error text-danger" *ngIf="m.emailto.hasError('email') &&m.emailto.invalid && m.emailto.touched">Email is invalid form</small>
+      </div>
+      <div class="mb-3">
+        <label for="subject" class="col-form-label">Subject</label>
+        <input [ngClass]="{ 'is-invalid':  m.subject.invalid && m.subject.touched }" type="text" class="form-control" id="subject" formControlName="subject">
+        <small class="p-error text-danger" *ngIf="m.subject.hasError('required') &&m.subject.invalid && m.subject.touched">subject is require</small>
+      </div>
+      <div class="mb-3">
+        <label for="user_email" class="col-form-label">Send to</label>
+        <textarea [ngClass]="{'is-invalid':  m.text.invalid && m.text.touched }" class="form-control col-md-6" id="text" placeholder="Parent / Child / Aunt / Neighbour" formControlName="text" rows="3"></textarea>
+        <small class="p-error text-danger" *ngIf="m.text.hasError('required') &&m.text.invalid && m.text.touched">Text is require</small>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="mail.invalid">Send</button>
+    </form>
+  </div>
+  <div class="col">
+    <h4>Receiving Email</h4>
+    <div *ngFor="let item of receivemail">
+      From : {{ item.receivemail_email }}
+    </div>
+  </div>
+</div>
