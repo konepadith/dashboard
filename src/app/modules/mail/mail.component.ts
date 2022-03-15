@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from "sweetalert2";
 import { NgxSpinnerService } from "ngx-spinner";
@@ -11,6 +11,7 @@ import { DashboardService } from '../dashboard.service';
 export class MailComponent implements OnInit {
   mail:any = FormGroup;
   receivemail:any
+  p: number = 1;
   constructor(private fb:FormBuilder,private spinner : NgxSpinnerService,private service:DashboardService) { }
 
   ngOnInit(): void {
@@ -55,6 +56,15 @@ export class MailComponent implements OnInit {
         }
       })
     }
+  }
+  inputFocus(email:string){
+    console.log(email)
+    this.mail.controls['emailto'].setValue(email);
 
+  }
+  read(receivemail_id:number){
+    this.service.readmail(receivemail_id).subscribe(response=>{
+      console.log(response)
+    })
   }
 }

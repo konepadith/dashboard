@@ -7,3 +7,9 @@
 .example-full-width {
   width: 100%;
 }
+.modal-backdrop{
+z-index: none !important;
+}
+.new-noti{
+  position: absolute;
+}

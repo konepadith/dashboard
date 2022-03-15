@@ -16,12 +16,17 @@ import { MailComponent } from 'src/app/modules/mail/mail.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import {NgxPaginationModule} from 'ngx-pagination';
+import { DogsComponent } from 'src/app/modules/dogs/dogs.component';
+import { SlideDirective } from 'src/app/modules/dogs/slide.directive';
 @NgModule({
   declarations: [
     DefaultComponent,
     DashboardComponent,
     PostsComponent,
     MailComponent,
+    DogsComponent,
+    SlideDirective
   ],
   imports: [
     CommonModule,
@@ -37,6 +42,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     FormsModule,
     ReactiveFormsModule,
     NgxSpinnerModule,
+    NgxPaginationModule
   ],
   providers:[
     DashboardService

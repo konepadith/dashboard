@@ -2,3 +2,7 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.modal-backdrop {
+  /* bug fix - no overlay */
+  display: none;
+}

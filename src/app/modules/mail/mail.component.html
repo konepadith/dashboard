@@ -24,8 +24,50 @@
   </div>
   <div class="col">
     <h4>Receiving Email</h4>
-    <div *ngFor="let item of receivemail">
-      From : {{ item.receivemail_email }}
+    <div *ngFor="let item of receivemail | paginate: { itemsPerPage: 10, currentPage: p }">
+      <div class="row mt-2">
+        <div class="col">
+          <div class="row">
+            <div class="col row"><span class="col text-start">From : {{ item.receivemail_email }}</span> <span class="col text-end">{{ item.receivemail_create_at | date: 'dd/MM/yyyy, hh:mm a' }}</span></div>
+          </div>
+        </div>
+        <div class="col">
+          <button type="button" class="btn btn-primary position-relative" data-bs-toggle="modal" (click)="read(item.receivemail_id);item.receivemail_status=1" attr.data-bs-target="#email{{ item.receivemail_id }}">
+            Read
+            <div style="font-size: 10px;" class="badge bg-danger new-noti" *ngIf="item.receivemail_status==0">new</div>
+          </button>
+          <div class="modal fade" id="email{{item.receivemail_id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title fs-6" id="exampleModalLabel" >From: {{ item.receivemail_email }} </h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  no : {{item.receivemail_id}} <br>
+                  Name : {{item.receivemail_name}} <br>
+                  Surname : {{item.receivemail_surname}} <br>
+                  Topic : {{item.receivemail_topic}} <br>
+                  Message : {{item.receivemail_msg}} <br>
+                  Phone : {{item.receivemail_phone}} <br>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" (click)="inputFocus(item.receivemail_email)" data-bs-dismiss="modal">
+                    Answer
+
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
     </div>
   </div>
 </div>
+

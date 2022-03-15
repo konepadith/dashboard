@@ -69,4 +69,11 @@ export class DashboardService {
     const url = 'http://localhost:3000/show_mail'
     return this.http.get<any>(url)
   }
+  readmail(receivemail_id:any){
+    const url = 'http://localhost:3000/read_mail?receivemail_id='+receivemail_id
+    return this.http.get<any>(url)
+  }
+  dogs_data(){
+    return this.http.get<any>('http://localhost:3000/dogs_data')
+  }
 }
