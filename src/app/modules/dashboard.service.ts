@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 
+import axios from 'axios';
+
 @Injectable({
   providedIn: 'root'
 })
 export class DashboardService {
-
+  url = 'http://localhost:3000'
   constructor(private http : HttpClient) { }
   bigChart(){
     return [{
@@ -62,18 +64,33 @@ export class DashboardService {
   }]
   }
   mail(data:any){
-    const url ='http://localhost:3000/mailing'
+    const url =this.url+'/mailing'
     return this.http.post<any>(url,data)
   }
   receive(){
-    const url = 'http://localhost:3000/show_mail'
+    const url = this.url+'/show_mail'
     return this.http.get<any>(url)
   }
   readmail(receivemail_id:any){
-    const url = 'http://localhost:3000/read_mail?receivemail_id='+receivemail_id
+    const url = this.url+'/read_mail?receivemail_id='+receivemail_id
     return this.http.get<any>(url)
   }
   dogs_data(){
-    return this.http.get<any>('http://localhost:3000/dogs_data')
+    return this.http.get<any>(this.url+'/dogs_data')
+  }
+  add_dog_data_array(data:any){
+    const url = this.url+'/add_dog_data_array'
+    return this.http.post<any>(url,data)
+  }
+  add_dog_data(data:any){
+    const url = this.url+'/add_dog_data'
+    return this.http.post<any>(url,data)
+  }
+  delete_dog_data(data:any){
+    const url = this.url+'/delete_dog_data'
+    return this.http.post<any>(url,data)
+  }
+  getDog(){
+    return axios.get(this.url+'/dogs_data')
   }
 }

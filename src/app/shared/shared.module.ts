@@ -15,6 +15,10 @@ import { AreaComponent } from './widgets/area/area.component';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { CardComponent } from './widgets/card/card.component';
 import { PieComponent } from './widgets/pie/pie.component';
+import { DialogBoxComponent } from './components/dialog-box/dialog-box.component';
+
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -22,7 +26,8 @@ import { PieComponent } from './widgets/pie/pie.component';
     SidebarComponent,
     AreaComponent,
     CardComponent,
-    PieComponent
+    PieComponent,
+    DialogBoxComponent,
   ],
   imports: [
     CommonModule,
@@ -34,7 +39,10 @@ import { PieComponent } from './widgets/pie/pie.component';
     MatMenuModule,
     MatListModule,
     RouterModule,
-    HighchartsChartModule
+    HighchartsChartModule,
+    MatFormFieldModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   exports:[
     HeaderComponent,
@@ -42,7 +50,8 @@ import { PieComponent } from './widgets/pie/pie.component';
     SidebarComponent,
     AreaComponent,
     CardComponent,
-    PieComponent
+    PieComponent,
+    DialogBoxComponent
   ]
 })
 export class SharedModule { }

@@ -19,6 +19,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { DogsComponent } from 'src/app/modules/dogs/dogs.component';
 import { SlideDirective } from 'src/app/modules/dogs/slide.directive';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 @NgModule({
   declarations: [
     DefaultComponent,
@@ -42,7 +44,9 @@ import { SlideDirective } from 'src/app/modules/dogs/slide.directive';
     FormsModule,
     ReactiveFormsModule,
     NgxSpinnerModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MatDialogModule,
+    MatCheckboxModule,
   ],
   providers:[
     DashboardService

@@ -1,55 +1,180 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { DashboardService } from '../dashboard.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-  {position: 11, name: 'Sodium', weight: 22.9897, symbol: 'Na'},
-  {position: 12, name: 'Magnesium', weight: 24.305, symbol: 'Mg'},
-  {position: 13, name: 'Aluminum', weight: 26.9815, symbol: 'Al'},
-  {position: 14, name: 'Silicon', weight: 28.0855, symbol: 'Si'},
-  {position: 15, name: 'Phosphorus', weight: 30.9738, symbol: 'P'},
-  {position: 16, name: 'Sulfur', weight: 32.065, symbol: 'S'},
-  {position: 17, name: 'Chlorine', weight: 35.453, symbol: 'Cl'},
-  {position: 18, name: 'Argon', weight: 39.948, symbol: 'Ar'},
-  {position: 19, name: 'Potassium', weight: 39.0983, symbol: 'K'},
-  {position: 20, name: 'Calcium', weight: 40.078, symbol: 'Ca'},
-];
+import { MatTable } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogBoxComponent } from '../../shared/components/dialog-box/dialog-box.component';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SelectionModel } from '@angular/cdk/collections';
 @Component({
   selector: 'app-dogs',
   templateUrl: './dogs.component.html',
   styleUrls: ['./dogs.component.scss']
 })
 export class DogsComponent implements OnInit {
+  displayedColumns: string[] = ['no', 'name', 'dob', 'gender','action'];
+  data:any=[]
+  dataSource : any;
+  @ViewChild(MatPaginator,{static:true}) paginator!: MatPaginator;
+  @ViewChild(MatTable,{static:true}) table!: MatTable<any>;
+  myFiles:any
+  addDogs:any = FormGroup
+  selection = new SelectionModel<Element>(true, []);
+  constructor(private service : DashboardService,
+              private fb:FormBuilder,
+              private cd: ChangeDetectorRef,
+              public dialog: MatDialog) {
 
-  DogList:any
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-  @ViewChild(MatPaginator ,{static:true}) paginator!: MatPaginator;
-  constructor(private service : DashboardService) { }
 
-  ngOnInit(): void {
 
-    this.dataSource.paginator = this.paginator;
-    this.service.dogs_data().subscribe(response=>{
-      this.DogList=response.data
-      console.log(this.DogList)
-    })
   }
 
+  ngOnInit(): void {
+    this.addDogs=this.fb.group({
+      dog_name:       [null,Validators.required],
+      dog_dob:        [null,Validators.required],
+      dog_gender:     [null,Validators.required],
+      dog_species:    [null,Validators.required],
+      images:         [null,Validators.required],
+    })
+
+    this.service.dogs_data().subscribe(response=>{
+      this.data=response.data
+      this.dataSource = new MatTableDataSource(this.data);
+      this.dataSource.paginator = this.paginator;
+      })
+
+  }
+
+  get d() { return this.addDogs.controls; }
+
+
+  public ageFromDateOfBirthday(dateOfBirth: any): number {
+    const today = new Date();
+    const birthDate = new Date(dateOfBirth);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  }
+
+  dog_gender(status:any){
+    let semantic
+    switch (status) {
+      case 0:
+        semantic='Girl'
+          break;
+      case 1:
+        semantic='Boy'
+          break;
+    }
+    return semantic
+  }
+
+  uploadno1(event:any){
+    this.myFiles = event.target.files
+  }
+
+  adddogs(){
+    const data= new FormData(); //Create Data Store by FormData()
+    Object.entries(this.addDogs.value).forEach(([key,value]:any[])=>{
+      data.set(key,value)
+    })
+    for (let index = 0; index < this.myFiles.length; index++) {
+      const element = this.myFiles[index];
+      data.append('images',element)
+    }
+
+    console.log(data)
+    this.service.add_dog_data_array(data).subscribe(response=>{
+      console.log(response)
+
+      this.service.dogs_data().subscribe(response=>{
+        this.data=response.data
+        this.dataSource = new MatTableDataSource(this.data);
+        this.dataSource.paginator = this.paginator;
+        })
+    })
+
+  }
+  // openDialog(action:any,obj:any) {
+  //   obj.action = action;
+  //   const dialogRef = this.dialog.open(DialogBoxComponent, {
+  //     width: '250px',
+  //     data:obj
+  //   });
+
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     if(result.event == 'Add'){
+  //       this.addRowData(result.data);
+  //     }else if(result.event == 'Update'){
+  //       this.updateRowData(result.data);
+  //     }else if(result.event == 'Delete'){
+  //       this.deleteRowData(result.data);
+  //     }
+  //   });
+  // }
+  // addRowData(row_obj:any){
+  //   var d = new Date();
+  //   this.dataSource.push({
+  //     id:d.getTime(),
+  //     name:row_obj.name
+  //   });
+  //   this.table.renderRows();
+
+  // }
+  // updateRowData(row_obj:any){
+  //   this.dataSource = this.dataSource.data.filter((value:any,key:any)=>{
+  //     if(value.dog_id == row_obj.dog_id){
+  //       value.name = row_obj.name;
+  //     }
+  //     return true;
+  //   });
+  // }
+  // deleteRowData(row_obj:any){
+  //   this.dataSource = this.dataSource.data.filter((value:any,key:any)=>{
+
+  //     return value.dog_id != row_obj.dog_id ;
+  //   });
+  // }
+  // isAllSelected() {
+  //   const numSelected = this.selection.selected.length;
+  //   const numRows = this.dataSource.data.length;
+  //   return numSelected === numRows;
+  // }
+  // masterToggle() {
+  //   this.isAllSelected() ?
+  //     this.selection.clear() :
+  //     this.dataSource.data.forEach((row: Element) => this.selection.select(row));
+  // }
+  // removeSelectedRows() {
+
+  //   this.selection.selected.forEach(item => {
+  //     let index: number = this.data.findIndex((d: Element) => d === item);
+  //     console.log(this.data.findIndex((d: Element) => d === item));
+  //     this.data.splice(index,1)
+  //     this.dataSource = new MatTableDataSource<Element>(this.data);
+  //   });
+  //   this.selection = new SelectionModel<Element>(true, []);
+  // }
+
+  Edit(event:any){
+    console.log(event.dog_id)
+
+  }
+  Delete(event:any){
+    let data={'dog_id':event.dog_id}
+    this.service.delete_dog_data(data).subscribe(response=>{
+      console.log(response)
+      this.service.dogs_data().subscribe(response=>{
+        this.data=response.data
+        this.dataSource = new MatTableDataSource(this.data);
+        this.dataSource.paginator = this.paginator;
+        })
+    })
+  }
 }
