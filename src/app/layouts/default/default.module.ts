@@ -18,9 +18,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { DogsComponent } from 'src/app/modules/dogs/dogs.component';
-import { SlideDirective } from 'src/app/modules/dogs/slide.directive';
+import { SlideDirective } from 'src/app/modules/dogs/dog-edit/slide.directive';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { DogEditComponent } from 'src/app/modules/dogs/dog-edit/dog-edit.component';
 @NgModule({
   declarations: [
     DefaultComponent,
@@ -28,7 +29,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     PostsComponent,
     MailComponent,
     DogsComponent,
-    SlideDirective
+    SlideDirective,
+    DogEditComponent,
   ],
   imports: [
     CommonModule,

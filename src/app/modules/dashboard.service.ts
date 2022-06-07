@@ -93,4 +93,12 @@ export class DashboardService {
   getDog(){
     return axios.get(this.url+'/dogs_data')
   }
+  data_dog_id(id:any){
+    const url=this.url+'/data_dog_id?id='+id
+    return this.http.get<any>(url)
+  }
+  update_dog(data:any){
+    const url= this.url+'/update_dogs'
+    return this.http.post<any>(url,data)
+  }
 }

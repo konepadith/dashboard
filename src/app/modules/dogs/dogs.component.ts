@@ -7,13 +7,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogBoxComponent } from '../../shared/components/dialog-box/dialog-box.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SelectionModel } from '@angular/cdk/collections';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-dogs',
   templateUrl: './dogs.component.html',
   styleUrls: ['./dogs.component.scss']
 })
 export class DogsComponent implements OnInit {
-  displayedColumns: string[] = ['no', 'name', 'dob', 'gender','action'];
+  displayedColumns: string[] = ['no', 'name', 'dob', 'gender','giver','action'];
   data:any=[]
   dataSource : any;
   @ViewChild(MatPaginator,{static:true}) paginator!: MatPaginator;
@@ -24,7 +25,8 @@ export class DogsComponent implements OnInit {
   constructor(private service : DashboardService,
               private fb:FormBuilder,
               private cd: ChangeDetectorRef,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,
+              private router:Router) {
 
 
 
@@ -36,6 +38,7 @@ export class DogsComponent implements OnInit {
       dog_dob:        [null,Validators.required],
       dog_gender:     [null,Validators.required],
       dog_species:    [null,Validators.required],
+      giver_email:    [null],
       images:         [null,Validators.required],
     })
 
@@ -163,8 +166,8 @@ export class DogsComponent implements OnInit {
   // }
 
   Edit(event:any){
-    console.log(event.dog_id)
-
+    // console.log(event.dog_id)
+    this.router.navigate(['dogs/dog-edit',event.dog_id])
   }
   Delete(event:any){
     let data={'dog_id':event.dog_id}

@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="col-5 w-25"><div class="" *ngFor="let item of dog_list">
+    <div class="col-md dog-pic">
+      <img src="{{ item.dog_img }}" alt="" id="{{item.dog_id}}">
+      <div class="img-prev text-center">
+        <div class="img-slide active">
+          <img src="{{ item.dog_img }}" alt="" appSilde>
+        </div>
+        <div class="img-slide">
+          <img src="{{ item.dog_img2 }}" alt="" appSilde>
+        </div>
+        <div class="img-slide">
+          <img src="{{ item.dog_img3 }}" alt="" appSilde>
+        </div>
+        <div class="img-slide">
+          <img src="{{ item.dog_img4 }}" alt="" appSilde>
+        </div>
+        <div class="img-slide">
+          <img src="{{ item.dog_img5 }}" alt="" appSilde>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <div class="col">
+    <form action="" [formGroup]="UpdateDog" (ngSubmit)="DogEdit()" method="post">
+      <div class="row w-75 justify-content-center">
+        <div class="col">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control shadow-none" id="floatingInput" placeholder="John" formControlName="dog_name">
+            <label for="floatingInput">Fog name</label>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control shadow-none" id="floatingInput" placeholder="Doe" formControlName="dog_species">
+            <label for="floatingInput">Dog species</label>
+          </div>
+        </div>
+      </div>
+      <div class="row w-75 justify-content-center">
+        <div class="col">
+          <div class="form-floating col mb-3">
+            <select class="form-select shadow-none" id="floatingSelect" formControlName="dog_gender">
+              <option disable seleted hidden value="" >Select gender</option>
+              <option value="1">Boy</option>
+              <option value="0">Girl</option>
+            </select>
+            <label for="floatingSelect">Gender</label>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-floating mb-3">
+            <input  type="date" name="user_dob" id="user_dob" class="form-control shadow-none" formControlName="dog_dob">
+            <label for="user_dob">Date of Birth</label>
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-dark p-3  me-3 text-center shadow-none" [disabled]="this.UpdateDog.invalid">Save</button>
+    </form>
+  </div>
+</div>

@@ -11,7 +11,7 @@ export class SlideDirective {
   imageChange(id: any){
     var src:any = this.el.nativeElement.src
     var prev:any = document.getElementById(id)
-    // console.log(prev)
+    console.log(prev)
     prev.src=src
     var imageSlide = document.getElementsByClassName("img-slide")
     for(let i = 0; i<imageSlide.length; i++){
