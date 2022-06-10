@@ -22,6 +22,8 @@ import { SlideDirective } from 'src/app/modules/dogs/dog-edit/slide.directive';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { DogEditComponent } from 'src/app/modules/dogs/dog-edit/dog-edit.component';
+import { FormComponent } from 'src/app/modules/form/form.component';
+import { MatSortModule } from '@angular/material/sort';
 @NgModule({
   declarations: [
     DefaultComponent,
@@ -31,6 +33,7 @@ import { DogEditComponent } from 'src/app/modules/dogs/dog-edit/dog-edit.compone
     DogsComponent,
     SlideDirective,
     DogEditComponent,
+    FormComponent
   ],
   imports: [
     CommonModule,
@@ -49,6 +52,7 @@ import { DogEditComponent } from 'src/app/modules/dogs/dog-edit/dog-edit.compone
     NgxPaginationModule,
     MatDialogModule,
     MatCheckboxModule,
+    MatSortModule
   ],
   providers:[
     DashboardService

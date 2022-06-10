@@ -1,1 +1,178 @@
-<p>form works!</p>
+
+<div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="20px">
+  <div fxFlex="50">
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" #mytable matSort (matSortChange)="announceSortChange($event)" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="no">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by no">No. </th>
+          <td mat-cell *matCellDef="let element">  {{element.form_id}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="user_name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Name">Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.user_name}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="dog_name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by dog">Dog name </th>
+          <td mat-cell *matCellDef="let element">  {{element.dog_name}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="form_status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Status">Status </th>
+          <td mat-cell *matCellDef="let element" > {{element.form_status}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by no">Action </th>
+          <td mat-cell *matCellDef="let element" class="action-link">
+            <a class="link-dark text-decoration-none" style="cursor: pointer;" (click)="read(element)">Read</a> |
+            <a class="link-success text-decoration-none" style="cursor: pointer;">Accept</a> |
+            <a class="link-danger text-decoration-none" style="cursor: pointer;">Decline</a>
+             </td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator [length]="data.length"
+                    [pageSize]="10"
+                     showFirstLastButtons
+                     aria-label="Select page of periodic elements">
+      </mat-paginator>
+    </div>
+  </div>
+  <div fxFlex="50">
+    <div class="row mb-5" *ngFor="let item of formList" >
+      <div class=" col-md-6 mb-3">
+        <p>1. Do you own or rent your current home?</p>
+        <div class="row ps-3">
+          <div class="col-md-2 form-check">
+
+            <label class="form-check-label fw-bolder" [ngClass]="{'text-warning':item.q_1==1,'text-success':item.q_1==2}" for="q_1_yes" >
+              {{answer(item.q_1)}}
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class=" col-md-6 mb-3">
+        <p>2. If you RENT your home, are pets allowed?</p>
+        <div class="row ps-3">
+          <div class="col-md-2 form-check">
+            <label class="form-check-label fw-bolder" [ngClass]="{'text-success':item.q_3==1,'text-danger':item.q_3==2,'text-secondary':item.q_3==3}" for="q_2_yes">
+              {{otheranswer(item.q_2)}}
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class=" col-md-6 mb-3">
+        <p>3. Is there a weight limit?</p>
+        <div class="row ps-3">
+          <div class="col-md-2 form-check">
+            <label class="form-check-label fw-bolder" [ngClass]="{'text-success':item.q_3==1,'text-danger':item.q_3==2,'text-secondary':item.q_3==3}" for="q_3_yes">
+              {{otheranswer(item.q_3)}}
+            </label>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="examplFormControlInput1" class="form-label">4. What is the weight limit?</label>
+        <p class="bg-light fw-bolder border border-secondary p-2 rounded">{{item.q_4}}</p>
+      </div>
+      <div class=" col-md-6 mb-3">
+        <p>5. Is a pet deposit required?</p>
+        <div class="row ps-3">
+          <div class="col-md-2 form-check">
+            <label class="form-check-label" [ngClass]="{'text-success':item.q_5==1,'text-warning':item.q_5==2,'text-danger':item.q_5==3}" for="q_5_yes">
+              {{otheranswer(item.q_5)}}
+            </label>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="examplFormControlInput1" class="form-label">6. What is the deposit amount?</label>
+        <p class="bg-light fw-bolder border border-secondary p-2 rounded">{{item.q_6}}</p>
+      </div>
+      <hr>
+      <div class=" col-md-6 mb-3">
+        <p>7. Do you travel frequently?</p>
+        <div class="row ps-3">
+          <div class="col-md-3 form-check">
+            <label class="form-check-label" [ngClass]="{'text-success':item.q_7==3,'text-warning':item.q_7==2,'text-danger':item.q_7==1}" for="q_7_yes">
+              {{fanswer(item.q_7)}}
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="examplFormControlInput1" class="form-label">8. when you are always, who will care for the
+          dog?</label>
+          <p class="bg-light fw-bolder border border-secondary p-2 rounded">{{item.q_8}}</p>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="examplFormControlInput1" class="form-label">9. how many hours per day will the dog be alone?</label>
+        <p class="bg-light fw-bolder border border-secondary p-2 rounded">{{item.q_9}}</p>
+      </div>
+      <div class="col-md-6 mb-3 ">
+        <label for="examplFormControlInput1" class="form-label">10. Where will the dog be kept during the day?</label>
+        <p class="bg-light fw-bolder border border-secondary p-2 rounded">{{item.q_10}}</p>
+      </div>
+      <div class="col-md-6 mb-3 ">
+        <label for="examplFormControlInput1" class="form-label">11. how long do you plan to keep this dog?</label>
+        <p class="bg-light fw-bolder border border-secondary p-2 rounded">{{item.q_11}}</p>
+      </div>
+      <div class="col-md-6 mb-3 ">
+        <label for="examplFormControlInput1" class="form-label">12. if you lost your job or had to move, or if the dog grows largers than expected,
+          what would you do with the dog?</label>
+          <p class="bg-light fw-bolder border border-secondary p-2 rounded">{{item.q_12}}</p>
+      </div>
+      <hr>
+      <div class="col-md-6 mb-3 ">
+        <label for="examplFormControlInput1" class="form-label">13. where will this dog be kept during bad weather?</label>
+        <p class="bg-light fw-bolder border border-secondary p-2 rounded">{{item.q_13}}</p>
+      </div>
+      <div class="col-md-6 mb-3 ">
+        <label for="examplFormControlInput1" class="form-label">14. how do you plan to house train the dog?</label>
+        <p class="bg-light fw-bolder border border-secondary p-2 rounded">{{item.q_14}}</p>
+      </div>
+      <div class="col-md-6 mb-3 ">
+        <label for="examplFormControlInput1" class="form-label">15. if this dog develops behavioral problems such as chewing, digging, etc, what 	masures will you take?</label>
+        <p class="bg-light fw-bolder border border-secondary p-2 rounded">{{item.q_15}}</p>
+      </div>
+      <div class="col-md-6 mb-3 ">
+        <label for="examplFormControlInput1" class="form-label">16. will you train this dog? if so, How?</label>
+        <p class="bg-light fw-bolder border border-secondary p-2 rounded">{{item.q_16}}</p>
+      </div>
+      <div class="col-md-6 mb-3 ">
+        <label for="examplFormControlInput1" class="form-label">17. Why do you want to adopt a companion animal?</label>
+        <p class="bg-light fw-bolder border border-secondary p-2 rounded">{{item.q_17}}</p>
+      </div>
+      <div class=" col-md-6 mb-3">
+        <p>18. Do you have a securely fenced yard?</p>
+        <div class="row ps-3">
+          <div class="col-md-3 form-check">
+
+            <label class="form-check-label fw-bolder" [ngClass]="{'text-success':item.q_18==1,'text-danger':item.q_18==2}" for="q_18_yes">
+              {{otheranswer(item.q_18)}}
+            </label>
+          </div>
+
+        </div>
+        <label for="examplFormControlInput1" class="form-label">19. how hight fence?</label>
+        <p class="bg-light fw-bolder border border-secondary p-2 rounded">{{item.q_19}}</p>
+      </div>
+      <hr>
+      <div class="col-sm-6">
+        <button class="btn btn-primary col-sm-3 text-center mt-5"  type="submit">Submit</button>
+      </div>
+
+    </div>
+  </div>
+</div>

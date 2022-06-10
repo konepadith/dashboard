@@ -101,4 +101,7 @@ export class DashboardService {
     const url= this.url+'/update_dogs'
     return this.http.post<any>(url,data)
   }
+  show_form(){
+    return this.http.get<any>(this.url+'/form_show')
+  }
 }
