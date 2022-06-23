@@ -40,9 +40,14 @@
             <td mat-cell *matCellDef="let element" > {{ dog_gender(element.dog_gender) }}  </td>
           </ng-container>
 
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>Gender </th>
+            <td mat-cell *matCellDef="let element" > {{ element.dog_status }}  </td>
+          </ng-container>
+
           <ng-container matColumnDef="giver">
             <th mat-header-cell *matHeaderCellDef>Giver </th>
-            <td mat-cell *matCellDef="let element" > {{ element.giver_id }}  </td>
+            <td mat-cell *matCellDef="let element" > {{ element.giver_email }}  </td>
           </ng-container>
 
           <ng-container matColumnDef="action">
@@ -114,6 +119,11 @@
             <label for="user_email" class="col-form-label">Dog species</label>
             <input type="text" class="form-control" formControlName="dog_species" [ngClass]="{ 'is-invalid':  d.dog_species.invalid && d.dog_species.touched }">
             <small class="p-error text-danger" *ngIf="d.dog_species.hasError('required') &&d.dog_species.invalid && d.dog_species.touched">Dog Species is require</small>
+          </div>
+          <div class="mb-3 col-sm-5">
+            <label for="user_email" class="col-form-label">Giver Email</label>
+            <input type="text" class="form-control" formControlName="giver_email" (input)="sendData($event)" [ngClass]="{ 'is-invalid':  d.giver_email.invalid && d.giver_email.touched }">
+            <small class="p-error text-danger" *ngIf="d.giver_email.hasError('required') &&d.giver_email.invalid && d.giver_email.touched">Dog Species is require</small>
           </div>
           <button type="submit" class="btn btn-primary form-control" [disabled]="addDogs.invalid">Add</button>
         </div>

@@ -75,8 +75,8 @@ export class DashboardService {
     const url = this.url+'/read_mail?receivemail_id='+receivemail_id
     return this.http.get<any>(url)
   }
-  dogs_data(){
-    return this.http.get<any>(this.url+'/dogs_data')
+  dogs_data_info(){
+    return this.http.get<any>(this.url+'/dogs_data_info')
   }
   add_dog_data_array(data:any){
     const url = this.url+'/add_dog_data_array'
@@ -103,5 +103,33 @@ export class DashboardService {
   }
   show_form(){
     return this.http.get<any>(this.url+'/form_show')
+  }
+  divided_form(data:any){
+    const url=this.url+'/divided_form'
+    return this.http.post<any>(url,data)
+  }
+  giver_register(data:any){
+    const url=this.url+'/giver_register'
+    return this.http.post<any>(url,data)
+  }
+  giver_data(){
+    return this.http.get<any>(this.url+'/giver_data')
+  }
+
+
+
+  village(){
+    const url=this.url+'/village'
+    return this.http.get<any>(url)
+  }
+
+  district(){
+    const url=this.url+'/district'
+    return this.http.get<any>(url)
+  }
+
+  province(){
+    const url=this.url+'/province'
+    return this.http.get<any>(url)
   }
 }

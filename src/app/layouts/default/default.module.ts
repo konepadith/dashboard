@@ -24,6 +24,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { DogEditComponent } from 'src/app/modules/dogs/dog-edit/dog-edit.component';
 import { FormComponent } from 'src/app/modules/form/form.component';
 import { MatSortModule } from '@angular/material/sort';
+
+import { GiverComponent } from 'src/app//modules/giver/giver.component';
 @NgModule({
   declarations: [
     DefaultComponent,
@@ -33,7 +35,8 @@ import { MatSortModule } from '@angular/material/sort';
     DogsComponent,
     SlideDirective,
     DogEditComponent,
-    FormComponent
+    FormComponent,
+    GiverComponent
   ],
   imports: [
     CommonModule,

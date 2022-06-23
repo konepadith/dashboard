@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./dogs.component.scss']
 })
 export class DogsComponent implements OnInit {
-  displayedColumns: string[] = ['no', 'name', 'dob', 'gender','giver','action'];
+  displayedColumns: string[] = ['no', 'name', 'dob', 'gender','status','giver','action'];
   data:any=[]
   dataSource : any;
   @ViewChild(MatPaginator,{static:true}) paginator!: MatPaginator;
@@ -37,12 +37,13 @@ export class DogsComponent implements OnInit {
       dog_dob:        [null,Validators.required],
       dog_gender:     [null,Validators.required],
       dog_species:    [null,Validators.required],
-      giver_email:    [null],
+      giver_email:    [null,Validators.email],
       images:         [null,Validators.required],
     })
 
-    this.service.dogs_data().subscribe(response=>{
+    this.service.dogs_data_info().subscribe(response=>{
       this.data=response.data
+      console.log(this.data)
       this.dataSource = new MatTableDataSource(this.data);
       this.dataSource.paginator = this.paginator;
       })
@@ -90,12 +91,10 @@ export class DogsComponent implements OnInit {
       const element = this.myFiles[index];
       data.append('images',element)
     }
-
-    console.log(data)
     this.service.add_dog_data_array(data).subscribe(response=>{
       console.log(response)
 
-      this.service.dogs_data().subscribe(response=>{
+      this.service.dogs_data_info().subscribe(response=>{
         this.data=response.data
         this.dataSource = new MatTableDataSource(this.data);
         this.dataSource.paginator = this.paginator;
@@ -172,11 +171,21 @@ export class DogsComponent implements OnInit {
     let data={'dog_id':event.dog_id}
     this.service.delete_dog_data(data).subscribe(response=>{
       console.log(response)
-      this.service.dogs_data().subscribe(response=>{
+      this.service.dogs_data_info().subscribe(response=>{
         this.data=response.data
         this.dataSource = new MatTableDataSource(this.data);
         this.dataSource.paginator = this.paginator;
         })
     })
+  }
+
+  sendData(event:any){
+    console.log(event.target.value)
+  }
+  set(event:any){
+    // console.log(document.getElementById('data')?.innerHTML)
+
+    // this.addDogs.get('giver_email').patchValue(document.getElementById('data')?.innerHTML);
+    // console.log(event)
   }
 }

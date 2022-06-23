@@ -1,0 +1,169 @@
+<div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="20px">
+  <div fxFlex="60">
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" #mytable>
+
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>No. </th>
+          <td mat-cell *matCellDef="let element"> {{element.giver_id}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.giver_name}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="surname">
+          <th mat-header-cell *matHeaderCellDef>Surname </th>
+          <td mat-cell *matCellDef="let element"> {{element.giver_surname }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="address">
+          <th mat-header-cell *matHeaderCellDef>Address </th>
+          <td mat-cell *matCellDef="let element" > {{ element.province }}  </td>
+        </ng-container>
+
+        <ng-container matColumnDef="contact">
+          <th mat-header-cell *matHeaderCellDef>Contact </th>
+          <td mat-cell *matCellDef="let element" > {{ element.giver_phoneNumber }}  </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef>Action </th>
+          <td mat-cell *matCellDef="let element" class="action-link">
+            <a (click)="Edit(element)" class="link-dark text-decoration-none" style="cursor: pointer;">Edit</a> |
+            <a (click)="Delete(element)" class="link-danger text-decoration-none" style="cursor: pointer;">Delete</a>
+             </td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator [length]="data.length"
+                    [pageSize]="10"
+                     showFirstLastButtons
+                     aria-label="Select page of periodic elements">
+      </mat-paginator>
+    </div>
+
+  </div>
+
+  <div fxFlex="60">
+    <form [formGroup]="Registration" (ngSubmit)="submit_registration()">
+
+      <div class="row">
+        <div class="form-floating col mb-3">
+          <input [ngClass]="{ 'is-invalid':  f.giver_name.invalid && f.giver_name.touched }" type="text" class="form-control" id="giver_name" placeholder="John" name="giver_name" formControlName="giver_name">
+          <label for="giver_name">&nbsp; Name</label>
+          <small class="p-error text-danger" *ngIf="  f.giver_name.hasError('required')&&f.giver_name.invalid && f.giver_name.touched">Name is require</small>
+        </div>
+
+        <div class="form-floating col mb-3">
+          <input [ngClass]="{'is-invalid':  f.giver_surname.invalid && f.giver_surname.touched }" type="text" class="form-control" id="giver_surname" placeholder="Smith" formControlName="giver_surname">
+          <label for="giver_surname">&nbsp; Surname</label>
+          <small class="p-error text-danger" *ngIf=" f.giver_surname.hasError('required') &&f.giver_surname.invalid && f.giver_surname.touched">Surname is require</small>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class=" form-floating col mb-3">
+          <input [ngClass]="{ 'is-invalid':  f.giver_email.invalid && f.giver_email.touched }" type="email" name="giver_email" id="giver_email" class="form-control" placeholder="name@example.com" formControlName="giver_email">
+          <label for="giver_email">&nbsp; Email</label>
+          <small class="p-error text-danger" *ngIf=" f.giver_email.hasError('required') &&f.giver_email.invalid && f.giver_email.touched">Email is require</small>
+          <small class="p-error text-danger" *ngIf=" f.giver_email.hasError('email') &&f.giver_email.invalid && f.giver_email.touched">Email is invalid form</small>
+        </div>
+      </div>
+      <!-- <div class="row">
+        <div class="form-floating col mb-3">
+          <input [ngClass]="{ 'is-invalid':  f.giver_password.invalid && f.giver_password.touched }" type="password" name="giver_password" id="giver_password" class="form-control" placeholder="***" formControlName="giver_password">
+          <label for="giver_password">&nbsp; Password</label>
+          <small class="p-error text-danger" *ngIf="  f.giver_password.hasError('required') &&f.giver_password.invalid && f.giver_password.touched">Password is require</small>
+          <small class="p-error text-danger" *ngIf="  f.giver_password.hasError('minlength') &&f.giver_password.invalid && f.giver_password.touched">Password must be 8</small>
+        </div>
+        <div class="form-floating col mb-3">
+          <input [ngClass]="{ 'is-invalid':  f.confirm_password.invalid && f.confirm_password.touched }" type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="***" formControlName="confirm_password">
+          <label for="confirm_password">&nbsp; Confirm password</label>
+          <small class="p-error text-danger" *ngIf="  f.confirm_password.hasError('required') &&f.confirm_password.invalid && f.confirm_password.touched">Consfirm password is require</small>
+          <small class="p-error text-danger" *ngIf=" f.confirm_password.hasError('MustMatch') &&f.confirm_password.invalid && f.confirm_password.touched">Confirm password didn't Match</small>
+        </div>
+      </div> -->
+      <div class="row">
+        <div class="form-floating col mb-3">
+          <select class="form-select" id="floatingSelect" [ngClass]="{ 'is-invalid':  f.giver_gender.invalid && f.giver_gender.touched }" [(ngModel)]="genderList" formControlName="giver_gender">
+            <option disable seleted hidden value="">Select gender</option>
+            <option value="1">Male</option>
+            <option value="2">Female</option>
+            <option value="3">Others</option>
+          </select>
+          <label for="floatingSelect">&nbsp; Gender</label>
+          <small class="p-error text-danger" *ngIf="  f.giver_gender.hasError('required') &&f.giver_gender.invalid && f.giver_gender.touched">Gender is require</small>
+        </div>
+        <div class="form-floating col mb-3">
+          <input [ngClass]="{ 'is-invalid':  f.giver_dob.invalid && f.giver_dob.touched }" type="date" name="giver_dob" id="giver_dob" class="form-control" formControlName="giver_dob">
+          <label for="giver_dob">&nbsp; Date of Birth</label>
+          <small class="p-error text-danger" *ngIf="  f.giver_dob.hasError('required') &&f.giver_dob.invalid && f.giver_dob.touched">Date of Birth is require</small>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-floating col mb-3">
+          <select class="form-select" id="giver_province" [ngClass]="{ 'is-invalid':  f.giver_province.invalid && f.giver_province.touched }" ngModel formControlName="giver_province" (change)="onSelectprovince($event)">
+            <option disable seleted hidden value="">Select Province</option>
+            <option *ngFor="let item of provinceList" value="{{ item.id_province }}">{{ item.name_lao }}</option>
+          </select>
+          <label for="giver_province">&nbsp; Province</label>
+          <small class="p-error text-danger" *ngIf="  f.giver_province.hasError('required') &&f.giver_province.invalid && f.giver_province.touched">Province is require</small>
+        </div>
+        <div class="form-floating col mb-3">
+          <select class="form-select" id="giver_district" [ngClass]="{ 'is-invalid':  f.giver_district.invalid && f.giver_district.touched }" [(ngModel)]="giver_district" formControlName="giver_district"  (change)="onSelectdistrict($event)">
+            <option disable seleted hidden value="">Select District</option>
+            <option *ngFor="let item of district_data" value="{{ item.id_district }}">{{ item.name_lao }}</option>
+          </select>
+          <label for="giver_district">&nbsp; District</label>
+          <small class="p-error text-danger" *ngIf="  f.giver_district.hasError('required') &&f.giver_district.invalid && f.giver_district.touched">District is require</small>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-floating col mb-3">
+          <select class="form-select" id="giver_village" [ngClass]="{ 'is-invalid':  f.giver_village.invalid && f.giver_village.touched }" [(ngModel)]="giver_village" formControlName="giver_village" >
+            <option disable seleted hidden value="">Select Village</option>
+            <option *ngFor="let item of village_data" value="{{ item.id_village }}">{{ item.name_lao }}</option>
+
+          </select>
+          <label for="giver_village">&nbsp; Village</label>
+          <small class="p-error text-danger" *ngIf="  f.giver_village.hasError('required') &&f.giver_village.invalid && f.giver_village.touched">Village is require</small>
+        </div>
+        <div class=" col mb-3">
+          <label for="floatingSelect">&nbsp; Image</label>
+          <input [ngClass]="{'is-invalid':  f.image.invalid && f.image.touched }" type="file" class="form-control form-control-sm" id="Image" placeholder="Smith" formControlName="image" (change)="onFIleSelect($event , 'image')">
+          <small class="p-error text-danger" *ngIf=" f.image.hasError('required') &&f.image.invalid && f.image.touched">Image is require</small>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-floating col mb-3">
+          <input [ngClass]="{ 'is-invalid':  f.giver_workplace.invalid && f.giver_workplace.touched }" type="text" class="form-control" id="giver_workplace" placeholder="Your Company" name="giver_workplace" formControlName="giver_workplace">
+          <label for="giver_workplace">&nbsp; Workplace</label>
+          <small class="p-error text-danger" *ngIf="  f.giver_workplace.hasError('required')&&f.giver_workplace.invalid && f.giver_workplace.touched">WorkPlace is require</small>
+        </div>
+
+        <div class="form-floating col mb-3">
+          <input [ngClass]="{'is-invalid':  f.giver_phoneNumber.invalid && f.giver_phoneNumber.touched }" type="text" class="form-control" id="giver_phoneNumber" placeholder="Phone Number 20540XXXXXX" formControlName="giver_phoneNumber">
+          <label for="giver_phoneNumber">&nbsp; Phone Number</label>
+          <small class="p-error text-danger" *ngIf=" f.giver_phoneNumber.hasError('required') &&f.giver_phoneNumber.invalid && f.giver_phoneNumber.touched">Phone Number is require</small>
+          <small class="p-error text-danger" *ngIf=" f.giver_phoneNumber.hasError('pattern') &&f.giver_phoneNumber.invalid && f.giver_phoneNumber.touched">Phonenumber is invalid format</small>
+        </div>
+      </div>
+      <div class="form-label">
+        <small class="p-error text-danger" *ngIf="email_exist">this email is already exist</small>
+        <button type="submit" class="btn btn-primary form-control" [disabled]="Registration.invalid">Sign up</button>
+      </div>
+
+    </form>
+  </div>
+
+</div>

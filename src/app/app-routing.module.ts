@@ -5,6 +5,7 @@ import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { DogEditComponent } from './modules/dogs/dog-edit/dog-edit.component';
 import { DogsComponent } from './modules/dogs/dogs.component';
 import { FormComponent } from './modules/form/form.component';
+import { GiverComponent } from './modules/giver/giver.component';
 import { MailComponent } from './modules/mail/mail.component';
 import { PostsComponent } from './modules/posts/posts.component';
 
@@ -33,6 +34,10 @@ const routes: Routes = [{
   {
     path:'form',
     component:FormComponent
+  },
+  {
+    path:'giver',
+    component:GiverComponent
   }
   ]
 }];
