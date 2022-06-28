@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DefaultComponent } from './layouts/default/default.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { DogEditComponent } from './modules/dogs/dog-edit/dog-edit.component';
+import { DogRecoveryComponent } from './modules/dogs/dog-recovery/dog-recovery.component';
 import { DogsComponent } from './modules/dogs/dogs.component';
 import { FormComponent } from './modules/form/form.component';
 import { GiverComponent } from './modules/giver/giver.component';
@@ -38,6 +39,10 @@ const routes: Routes = [{
   {
     path:'giver',
     component:GiverComponent
+  },
+  {
+    path:'dog_recovery',
+    component:DogRecoveryComponent
   }
   ]
 }];

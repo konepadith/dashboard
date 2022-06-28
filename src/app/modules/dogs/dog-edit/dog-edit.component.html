@@ -56,6 +56,20 @@
           </div>
         </div>
       </div>
+      <div class="row w-75 justify-content-center">
+        <div class="col">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control shadow-none" id="floatingInput" placeholder="John" formControlName="giver_email">
+            <label for="floatingInput">Giver Email</label>
+          </div>
+        </div>
+        <div class="col">
+          <!-- <div class="form-floating mb-3">
+            <input type="text" class="form-control shadow-none" id="floatingInput" placeholder="Doe" formControlName="dog_species">
+            <label for="floatingInput">Dog species</label>
+          </div> -->
+        </div>
+      </div>
       <button type="submit" class="btn btn-dark p-3  me-3 text-center shadow-none" [disabled]="this.UpdateDog.invalid">Save</button>
     </form>
   </div>

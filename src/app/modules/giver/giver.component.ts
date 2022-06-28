@@ -170,8 +170,8 @@ export class GiverComponent implements OnInit {
       this.router.navigate(['giver/giver-edit',event.dog_id])
     }
     Delete(event:any){
-      let data={'giver_id':event.dog_id}
-      this.service.delete_dog_data(data).subscribe(response=>{
+      let data={'giver_id':event.dog_id,'dog_status':3}
+      this.service.status_dog_data(data).subscribe(response=>{
         console.log(response)
         this.service.dogs_data_info().subscribe(response=>{
           this.data=response.data

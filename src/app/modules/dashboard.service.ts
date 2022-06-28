@@ -78,6 +78,9 @@ export class DashboardService {
   dogs_data_info(){
     return this.http.get<any>(this.url+'/dogs_data_info')
   }
+  delete_dog_info(){
+    return this.http.get<any>(this.url+'/delete_dog_info')
+  }
   add_dog_data_array(data:any){
     const url = this.url+'/add_dog_data_array'
     return this.http.post<any>(url,data)
@@ -86,8 +89,8 @@ export class DashboardService {
     const url = this.url+'/add_dog_data'
     return this.http.post<any>(url,data)
   }
-  delete_dog_data(data:any){
-    const url = this.url+'/delete_dog_data'
+  status_dog_data(data:any){
+    const url = this.url+'/status_dog_data'
     return this.http.post<any>(url,data)
   }
   getDog(){

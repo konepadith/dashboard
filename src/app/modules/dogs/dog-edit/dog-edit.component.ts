@@ -24,6 +24,7 @@ export class DogEditComponent implements OnInit {
         dog_dob:      ['',Validators.required],
         dog_gender:      [response.data[0].dog_gender.toString(),Validators.required],
         dog_species:      [response.data[0].dog_species,Validators.required],
+        giver_email:      [response.data[0].giver_email,Validators.email]
       })
       this.UpdateDog.get('dog_dob').patchValue(this.formatDate(response.data[0].dog_dob));
     })
@@ -52,7 +53,13 @@ export class DogEditComponent implements OnInit {
           title: 'Sucessfully',
           text: 'Update Sucessfully',
           })
-      }else{
+      } else if(response.status == 3){
+        Swal.fire({
+          icon: 'error',
+          title: 'Fail',
+          text: 'This Email is not exist',
+        })
+      } else{
         Swal.fire({
           icon: 'error',
           title: 'Sonething went wrong',

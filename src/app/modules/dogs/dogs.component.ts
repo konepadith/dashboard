@@ -3,10 +3,9 @@ import { DashboardService } from '../dashboard.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatTable } from '@angular/material/table';
-import { MatDialog } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SelectionModel } from '@angular/cdk/collections';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-dogs',
   templateUrl: './dogs.component.html',
@@ -20,11 +19,9 @@ export class DogsComponent implements OnInit {
   @ViewChild(MatTable,{static:true}) table!: MatTable<any>;
   myFiles:any
   addDogs:any = FormGroup
-  selection = new SelectionModel<Element>(true, []);
   constructor(private service : DashboardService,
               private fb:FormBuilder,
               private cd: ChangeDetectorRef,
-              public dialog: MatDialog,
               private router:Router) {
 
 
@@ -92,13 +89,38 @@ export class DogsComponent implements OnInit {
       data.append('images',element)
     }
     this.service.add_dog_data_array(data).subscribe(response=>{
-      console.log(response)
+      console.log(response.status)
 
-      this.service.dogs_data_info().subscribe(response=>{
-        this.data=response.data
-        this.dataSource = new MatTableDataSource(this.data);
-        this.dataSource.paginator = this.paginator;
-        })
+      if (response.status === 1) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Sucessfully',
+          text: 'Welcome new Member',
+          })
+            this.service.dogs_data_info().subscribe(response=>{
+              this.data=response.data
+              this.dataSource = new MatTableDataSource(this.data);
+              this.dataSource.paginator = this.paginator;
+              })
+      } else if (response.status === 3) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Fail',
+          text: 'this email is not registered',
+          })
+      }else{
+        Swal.fire({
+          icon: 'warning',
+          title: 'Something Wrong',
+          text: 'Please contact developer',
+          })
+      }
+
+
+
+
+
+
     })
 
   }
@@ -168,8 +190,8 @@ export class DogsComponent implements OnInit {
     this.router.navigate(['dogs/dog-edit',event.dog_id])
   }
   Delete(event:any){
-    let data={'dog_id':event.dog_id}
-    this.service.delete_dog_data(data).subscribe(response=>{
+    let data={'dog_id':event.dog_id,'dog_status':3}
+    this.service.status_dog_data(data).subscribe(response=>{
       console.log(response)
       this.service.dogs_data_info().subscribe(response=>{
         this.data=response.data
@@ -177,10 +199,6 @@ export class DogsComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
         })
     })
-  }
-
-  sendData(event:any){
-    console.log(event.target.value)
   }
   set(event:any){
     // console.log(document.getElementById('data')?.innerHTML)

@@ -22,6 +22,7 @@ import { SlideDirective } from 'src/app/modules/dogs/dog-edit/slide.directive';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { DogEditComponent } from 'src/app/modules/dogs/dog-edit/dog-edit.component';
+import { DogRecoveryComponent } from 'src/app/modules/dogs/dog-recovery/dog-recovery.component';
 import { FormComponent } from 'src/app/modules/form/form.component';
 import { MatSortModule } from '@angular/material/sort';
 
@@ -36,7 +37,8 @@ import { GiverComponent } from 'src/app//modules/giver/giver.component';
     SlideDirective,
     DogEditComponent,
     FormComponent,
-    GiverComponent
+    GiverComponent,
+    DogRecoveryComponent
   ],
   imports: [
     CommonModule,

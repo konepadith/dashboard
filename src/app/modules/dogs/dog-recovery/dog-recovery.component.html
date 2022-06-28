@@ -1,1 +1,75 @@
-<p>dog-recovery works!</p>
+<div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="20px">
+  <div fxFlex="60">
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" #mytable>
+         <!-- Checkbox Column -->
+  <!-- <ng-container matColumnDef="select"> -->
+    <!-- <th mat-header-cell *matHeaderCellDef>
+      <mat-checkbox (change)="$event ? masterToggle() : null"
+                    [checked]="selection.hasValue() && isAllSelected()"
+                    [indeterminate]="selection.hasValue() && !isAllSelected()">
+      </mat-checkbox>
+    </th>
+    <td mat-cell *matCellDef="let row">
+      <mat-checkbox (click)="$event.stopPropagation()"
+                    (change)="$event ? selection.toggle(row) : null"
+                    [checked]="selection.isSelected(row)">
+      </mat-checkbox>
+    </td> -->
+  <!-- </ng-container> -->
+
+        <ng-container matColumnDef="no">
+          <th mat-header-cell *matHeaderCellDef>No. </th>
+          <td mat-cell *matCellDef="let element"> {{element.dog_id}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.dog_name}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="dob">
+          <th mat-header-cell *matHeaderCellDef>DOB </th>
+          <td mat-cell *matCellDef="let element"> {{element.dog_dob | date:'dd/MM/yyyy'}} | {{ ageFromDateOfBirthday(element.dog_dob) }} Years</td>
+        </ng-container>
+
+        <ng-container matColumnDef="gender">
+          <th mat-header-cell *matHeaderCellDef>Gender </th>
+          <td mat-cell *matCellDef="let element" > {{ dog_gender(element.dog_gender) }}  </td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>Gender </th>
+          <td mat-cell *matCellDef="let element" > {{ element.dog_status }}  </td>
+        </ng-container>
+
+        <ng-container matColumnDef="giver">
+          <th mat-header-cell *matHeaderCellDef>Giver </th>
+          <td mat-cell *matCellDef="let element" > {{ element.giver_email }}  </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef>Action </th>
+          <td mat-cell *matCellDef="let element" class="action-link">
+            <a (click)="Restore(element)" class="link-dark text-decoration-none" style="cursor: pointer;">Restore</a>
+
+             </td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator [length]="data.length"
+                    [pageSize]="10"
+                     showFirstLastButtons
+                     aria-label="Select page of periodic elements">
+      </mat-paginator>
+    </div>
+
+
+  </div>
+</div>

@@ -69,7 +69,7 @@
                        aria-label="Select page of periodic elements">
         </mat-paginator>
       </div>
-
+      <div class="pt-3"><a class="btn btn-primary"routerLinkActive="router-link-active" routerLink="/dog_recovery" role="button">Recovery</a></div>
 
     </div>
 
@@ -122,7 +122,7 @@
           </div>
           <div class="mb-3 col-sm-5">
             <label for="user_email" class="col-form-label">Giver Email</label>
-            <input type="text" class="form-control" formControlName="giver_email" (input)="sendData($event)" [ngClass]="{ 'is-invalid':  d.giver_email.invalid && d.giver_email.touched }">
+            <input type="text" class="form-control" formControlName="giver_email" [ngClass]="{ 'is-invalid':  d.giver_email.invalid && d.giver_email.touched }">
             <small class="p-error text-danger" *ngIf="d.giver_email.hasError('required') &&d.giver_email.invalid && d.giver_email.touched">Dog Species is require</small>
           </div>
           <button type="submit" class="btn btn-primary form-control" [disabled]="addDogs.invalid">Add</button>
