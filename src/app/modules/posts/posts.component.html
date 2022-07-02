@@ -1,1 +1,139 @@
-<p>posts works!</p>
+<div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="20px">
+  <div fxFlex="60">
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" #mytable>
+         <!-- Checkbox Column -->
+  <!-- <ng-container matColumnDef="select"> -->
+    <!-- <th mat-header-cell *matHeaderCellDef>
+      <mat-checkbox (change)="$event ? masterToggle() : null"
+                    [checked]="selection.hasValue() && isAllSelected()"
+                    [indeterminate]="selection.hasValue() && !isAllSelected()">
+      </mat-checkbox>
+    </th>
+    <td mat-cell *matCellDef="let row">
+      <mat-checkbox (click)="$event.stopPropagation()"
+                    (change)="$event ? selection.toggle(row) : null"
+                    [checked]="selection.isSelected(row)">
+      </mat-checkbox>
+    </td> -->
+  <!-- </ng-container> -->
+
+        <ng-container matColumnDef="no">
+          <th mat-header-cell *matHeaderCellDef>No. </th>
+          <td mat-cell *matCellDef="let element"> {{element.event_id}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="event">
+          <th mat-header-cell *matHeaderCellDef>Topic </th>
+          <td mat-cell *matCellDef="let element"> {{element.event_topic}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef>Date </th>
+          <td mat-cell *matCellDef="let element"> {{element.event_date | date:'dd/MM/yyyy'}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="time">
+          <th mat-header-cell *matHeaderCellDef>Time </th>
+          <td mat-cell *matCellDef="let element" > {{ element.event_start }} || {{ element.event_end }}  </td>
+        </ng-container>
+
+        <ng-container matColumnDef="places">
+          <th mat-header-cell *matHeaderCellDef>Location </th>
+          <td mat-cell *matCellDef="let element" > {{ element.event_place }}  </td>
+        </ng-container>
+
+        <ng-container matColumnDef="location">
+          <th mat-header-cell *matHeaderCellDef>Direction </th>
+          <td mat-cell *matCellDef="let element" > <a href="{{ element.event_direction }}"target="_blank" class="btn btn-dark" >Direction</a>  </td>
+        </ng-container>
+
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef>Status </th>
+          <td mat-cell *matCellDef="let element" >  <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked (change)="test($event)">
+            <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+          </div></td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef>Action </th>
+          <td mat-cell *matCellDef="let element" class="action-link">
+            <a  class="link-dark text-decoration-none" style="cursor: pointer;">Edit</a> |
+            <a  class="link-danger text-decoration-none" style="cursor: pointer;">Delete</a>
+             </td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator [length]="data.length"
+                    [pageSize]="10"
+                     showFirstLastButtons
+                     aria-label="Select page of periodic elements">
+      </mat-paginator>
+    </div>
+  </div>
+  <div fxFlex="40">
+    <form class="example-form" [formGroup]="addEvent" (ngSubmit)="addevent()">
+      <div class="row">
+        <div class="mb-3 col-sm-5">
+          <label for="user_email" class="col-form-label">Name</label>
+          <input type="text" class="form-control" formControlName="event_topic" [ngClass]="{ 'is-invalid':  e.event_topic.invalid && e.event_topic.touched }">
+          <small class="p-error text-danger" *ngIf="e.event_topic.hasError('required') &&e.event_topic.invalid && e.event_topic.touched">Name is require</small>
+        </div>
+
+        <div class="mb-3 col-sm-5">
+          <label for="user_email" class="col-form-label">Date Of Birth</label>
+          <input type="date" class="form-control" formControlName="event_date" [ngClass]="{ 'is-invalid':  e.event_date.invalid && e.event_date.touched }">
+          <small class="p-error text-danger" *ngIf="e.event_date.hasError('required') &&e.event_date.invalid && e.event_date.touched">Date of Birth is require</small>
+        </div>
+
+        <div class="mb-3 col-sm-5 form-check">
+          <label for="user_email" class="col-form-label">Gender</label>
+          <div class="row">
+            <div class="form-check col-sm-3">
+              <input type="radio" id="girl" class="form-check-input" formControlName="event_status" value="0" [ngClass]="{ 'is-invalid':  e.event_status.invalid && e.event_status.touched }">
+            <label class="form-check-label" for="girl">
+              Girl
+            </label>
+            </div>
+            <div class="form-check col-sm-3">
+              <input type="radio" id="boy" class="form-check-input" formControlName="event_status" value="1" [ngClass]="{ 'is-invalid':  e.event_status.invalid && e.event_status.touched }">
+            <label class="form-check-label" for="boy">
+              Boy
+            </label>
+            </div>
+          </div>
+        </div>
+        <div class="mb-3 col-sm-5">
+          <label for="user_email" class="col-form-label">Dog species</label>
+          <input type="text" class="form-control" formControlName="event_start" [ngClass]="{ 'is-invalid':  e.event_start.invalid && e.event_start.touched }">
+          <small class="p-error text-danger" *ngIf="e.event_start.hasError('required') &&e.event_start.invalid && e.event_start.touched">Dog Species is require</small>
+        </div>
+        <div class="mb-3 col-sm-5">
+          <label for="user_email" class="col-form-label">Dog species</label>
+          <input type="text" class="form-control" formControlName="event_end" [ngClass]="{ 'is-invalid':  e.event_end.invalid && e.event_end.touched }">
+          <small class="p-error text-danger" *ngIf="e.event_end.hasError('required') &&e.event_end.invalid && e.event_end.touched">Dog Species is require</small>
+        </div>
+        <div class="mb-3 col-sm-5">
+          <label for="user_email" class="col-form-label">Giver Email</label>
+          <input type="text" class="form-control" formControlName="event_place" [ngClass]="{ 'is-invalid':  e.event_place.invalid && e.event_place.touched }">
+          <small class="p-error text-danger" *ngIf="e.event_place.hasError('required') &&e.event_place.invalid && e.event_place.touched">Dog Species is require</small>
+        </div>
+        <div class="mb-3 col-sm-5">
+          <label for="user_email" class="col-form-label">Giver Email</label>
+          <input type="text" class="form-control" formControlName="event_direction" [ngClass]="{ 'is-invalid':  e.event_direction.invalid && e.event_direction.touched }">
+          <small class="p-error text-danger" *ngIf="e.event_direction.hasError('required') &&e.event_direction.invalid && e.event_direction.touched">Dog Species is require</small>
+        </div>
+        <button type="submit" class="btn btn-primary form-control" [disabled]="addEvent.invalid">Add</button>
+      </div>
+    </form>
+
+    <!-- <input type="file" (change)="upload($event)" multiple> -->
+  </div>
+</div>

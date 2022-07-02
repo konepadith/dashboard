@@ -118,7 +118,13 @@ export class DashboardService {
   giver_data(){
     return this.http.get<any>(this.url+'/giver_data')
   }
-
+  events_data_adm(){
+    return this.http.get<any>(this.url+'/events_data_adm')
+  }
+  add_events(data:any){
+    const url=this.url+'/add_events'
+    return this.http.post<any>(url,data)
+  }
 
 
   village(){
