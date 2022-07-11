@@ -6,6 +6,7 @@ import { MatTable } from '@angular/material/table';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { Subject,switchMap } from 'rxjs';
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',
@@ -18,10 +19,16 @@ export class PostsComponent implements OnInit {
   addEvent:any = FormGroup
   @ViewChild(MatPaginator,{static:true}) paginator!: MatPaginator;
   @ViewChild(MatTable,{static:true}) table!: MatTable<any>;
+  switches = new Subject<any>();
   constructor(private service : DashboardService,
     private fb:FormBuilder,
     private cd: ChangeDetectorRef,
-    private router:Router) { }
+    private router:Router) {
+
+      this.switches.pipe(switchMap((searchProduct)=>
+    this.service.event_switch(searchProduct))).subscribe((value)=>
+    console.log('test',value));
+     }
 
   ngOnInit(): void {
     this.addEvent=this.fb.group({
@@ -45,7 +52,27 @@ export class PostsComponent implements OnInit {
   addevent(){
 
   }
-  test(event:any){
-    console.log(event.target.checked)
+
+  switch(event:any,event_id:any){
+
+    let status=event.target.checked
+    if (status==true) {
+      const data={event_status: 1,
+                  event_id:event_id}
+      this.switches.next(data);
+
+    this.service.event_switch(data).subscribe(res=>{
+      console.log(res)
+    })
+    } else if(status==false){
+      const data={event_status: 0,
+        event_id:event_id}
+      this.switches.next(data);
+
+    this.service.event_switch(data).subscribe(res=>{
+      console.log(res)
+    })
+    }
+
   }
 }

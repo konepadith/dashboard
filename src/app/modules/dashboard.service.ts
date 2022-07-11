@@ -126,6 +126,10 @@ export class DashboardService {
     return this.http.post<any>(url,data)
   }
 
+  event_switch(data:any){
+    const url=this.url+'/event_switch'
+    return this.http.post<any>(url,data)
+  }
 
   village(){
     const url=this.url+'/village'
