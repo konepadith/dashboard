@@ -19,39 +19,39 @@
   <!-- </ng-container> -->
 
         <ng-container matColumnDef="no">
-          <th mat-header-cell *matHeaderCellDef>No. </th>
+          <th mat-header-cell *matHeaderCellDef>ລຳດັບ </th>
           <td mat-cell *matCellDef="let element"> {{element.event_id}} </td>
         </ng-container>
 
 
         <ng-container matColumnDef="event">
-          <th mat-header-cell *matHeaderCellDef>Topic </th>
+          <th mat-header-cell *matHeaderCellDef>ເລື່ອງ </th>
           <td mat-cell *matCellDef="let element"> {{element.event_topic}} </td>
         </ng-container>
 
 
         <ng-container matColumnDef="date">
-          <th mat-header-cell *matHeaderCellDef>Date </th>
+          <th mat-header-cell *matHeaderCellDef>ວັນເດືອນປີເກີດ </th>
           <td mat-cell *matCellDef="let element"> {{element.event_date | date:'dd/MM/yyyy'}}</td>
         </ng-container>
 
         <ng-container matColumnDef="time">
-          <th mat-header-cell *matHeaderCellDef>Time </th>
+          <th mat-header-cell *matHeaderCellDef>ເວລາ </th>
           <td mat-cell *matCellDef="let element" > {{ element.event_start }} || {{ element.event_end }}  </td>
         </ng-container>
 
         <ng-container matColumnDef="places">
-          <th mat-header-cell *matHeaderCellDef>Location </th>
+          <th mat-header-cell *matHeaderCellDef>ສະຖານທີ່ </th>
           <td mat-cell *matCellDef="let element" > {{ element.event_place }}  </td>
         </ng-container>
 
         <ng-container matColumnDef="location">
-          <th mat-header-cell *matHeaderCellDef>Direction </th>
-          <td mat-cell *matCellDef="let element" > <a href="{{ element.event_direction }}"target="_blank" class="btn btn-dark" >Direction</a>  </td>
+          <th mat-header-cell *matHeaderCellDef>ທິດທາງ </th>
+          <td mat-cell *matCellDef="let element" > <a href="{{ element.event_direction }}"target="_blank" class="btn btn-dark" >ທິດທາງ</a>  </td>
         </ng-container>
 
         <ng-container matColumnDef="type">
-          <th mat-header-cell *matHeaderCellDef>Status </th>
+          <th mat-header-cell *matHeaderCellDef>ສະຖານະ </th>
           <td mat-cell *matCellDef="let element" >  <div class="form-check form-switch">
             <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" [checked]="element.event_status" (change)="switch($event,element.event_id)">
             <label class="form-check-label" for="flexSwitchCheckDefault"></label>
@@ -59,10 +59,10 @@
         </ng-container>
 
         <ng-container matColumnDef="action">
-          <th mat-header-cell *matHeaderCellDef>Action </th>
+          <th mat-header-cell *matHeaderCellDef>ຈັດການ</th>
           <td mat-cell *matCellDef="let element" class="action-link">
-            <a  class="link-dark text-decoration-none" style="cursor: pointer;">Edit</a> |
-            <a  class="link-danger text-decoration-none" style="cursor: pointer;">Delete</a>
+            <a  class="link-dark text-decoration-none" style="cursor: pointer;">ແກ້ໄຂ</a> |
+            <a  class="link-danger text-decoration-none" style="cursor: pointer;">ລົບ</a>
              </td>
         </ng-container>
 
@@ -82,55 +82,55 @@
     <form class="example-form" [formGroup]="addEvent" (ngSubmit)="addevent()">
       <div class="row">
         <div class="mb-3 col-sm-5">
-          <label for="user_email" class="col-form-label">Name</label>
+          <label for="user_email" class="col-form-label">ຂື່</label>
           <input type="text" class="form-control" formControlName="event_topic" [ngClass]="{ 'is-invalid':  e.event_topic.invalid && e.event_topic.touched }">
-          <small class="p-error text-danger" *ngIf="e.event_topic.hasError('required') &&e.event_topic.invalid && e.event_topic.touched">Name is require</small>
+          <small class="p-error text-danger" *ngIf="e.event_topic.hasError('required') &&e.event_topic.invalid && e.event_topic.touched">ຕ້ອງໃສ່ຊື່ກ່ອນ</small>
         </div>
 
         <div class="mb-3 col-sm-5">
-          <label for="user_email" class="col-form-label">Date Of Birth</label>
+          <label for="user_email" class="col-form-label">ວັນເດືອນປີເກີດ</label>
           <input type="date" class="form-control" formControlName="event_date" [ngClass]="{ 'is-invalid':  e.event_date.invalid && e.event_date.touched }">
-          <small class="p-error text-danger" *ngIf="e.event_date.hasError('required') &&e.event_date.invalid && e.event_date.touched">Date of Birth is require</small>
+          <small class="p-error text-danger" *ngIf="e.event_date.hasError('required') &&e.event_date.invalid && e.event_date.touched">ຕ້ອງໃສ່່ວັນເດືອນປີເກີດກ່ອນ</small>
         </div>
 
         <div class="mb-3 col-sm-5 form-check">
-          <label for="user_email" class="col-form-label">Gender</label>
+          <label for="user_email" class="col-form-label">ເພດ</label>
           <div class="row">
             <div class="form-check col-sm-3">
               <input type="radio" id="girl" class="form-check-input" formControlName="event_status" value="0" [ngClass]="{ 'is-invalid':  e.event_status.invalid && e.event_status.touched }">
             <label class="form-check-label" for="girl">
-              Girl
+              ເພດແມ່
             </label>
             </div>
             <div class="form-check col-sm-3">
               <input type="radio" id="boy" class="form-check-input" formControlName="event_status" value="1" [ngClass]="{ 'is-invalid':  e.event_status.invalid && e.event_status.touched }">
             <label class="form-check-label" for="boy">
-              Boy
+              ເພດຜູ້
             </label>
             </div>
           </div>
         </div>
         <div class="mb-3 col-sm-5">
-          <label for="user_email" class="col-form-label">Event start</label>
+          <label for="user_email" class="col-form-label">ກິດຈະກຳເລີ່ມ</label>
           <input type="text" class="form-control" formControlName="event_start" [ngClass]="{ 'is-invalid':  e.event_start.invalid && e.event_start.touched }">
-          <small class="p-error text-danger" *ngIf="e.event_start.hasError('required') &&e.event_start.invalid && e.event_start.touched">Dog Species is require</small>
+          <small class="p-error text-danger" *ngIf="e.event_start.hasError('required') &&e.event_start.invalid && e.event_start.touched">ຕ້ອງໃສ່ອີເວັ່ນກ່ອນ</small>
         </div>
         <div class="mb-3 col-sm-5">
-          <label for="user_email" class="col-form-label">Event end</label>
+          <label for="user_email" class="col-form-label">ກິດຈະກຳປິດ</label>
           <input type="text" class="form-control" formControlName="event_end" [ngClass]="{ 'is-invalid':  e.event_end.invalid && e.event_end.touched }">
-          <small class="p-error text-danger" *ngIf="e.event_end.hasError('required') &&e.event_end.invalid && e.event_end.touched">Dog Species is require</small>
+          <small class="p-error text-danger" *ngIf="e.event_end.hasError('required') &&e.event_end.invalid && e.event_end.touched">ຕ້ອງໃສ່ມື້ປິດອີເວັ່ນກ່ອນ</small>
         </div>
         <div class="mb-3 col-sm-5">
-          <label for="user_email" class="col-form-label">Places</label>
+          <label for="user_email" class="col-form-label">ສະຖາທີ່</label>
           <input type="text" class="form-control" formControlName="event_place" [ngClass]="{ 'is-invalid':  e.event_place.invalid && e.event_place.touched }">
-          <small class="p-error text-danger" *ngIf="e.event_place.hasError('required') &&e.event_place.invalid && e.event_place.touched">Dog Species is require</small>
+          <small class="p-error text-danger" *ngIf="e.event_place.hasError('required') &&e.event_place.invalid && e.event_place.touched">ຕ້ອງໃສ່ສະຖາທີ່ກ່ອນ</small>
         </div>
         <div class="mb-3 col-sm-5">
-          <label for="user_email" class="col-form-label">Direction</label>
+          <label for="user_email" class="col-form-label">ທິດທາງ</label>
           <input type="text" class="form-control" formControlName="event_direction" [ngClass]="{ 'is-invalid':  e.event_direction.invalid && e.event_direction.touched }">
-          <small class="p-error text-danger" *ngIf="e.event_direction.hasError('required') &&e.event_direction.invalid && e.event_direction.touched">Dog Species is require</small>
+          <small class="p-error text-danger" *ngIf="e.event_direction.hasError('required') &&e.event_direction.invalid && e.event_direction.touched">ຕ້ອງໃສ່ທິດທາງກ່ອນ</small>
         </div>
-        <button type="submit" class="btn btn-primary form-control" [disabled]="addEvent.invalid">Add</button>
+        <button type="submit" class="btn btn-primary form-control" [disabled]="addEvent.invalid">ເພີ່ມ</button>
       </div>
     </form>
 

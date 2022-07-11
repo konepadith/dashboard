@@ -66,10 +66,10 @@ export class DogsComponent implements OnInit {
     let semantic
     switch (status) {
       case 0:
-        semantic='Girl'
+        semantic='ເພດຜູ້'
           break;
       case 1:
-        semantic='Boy'
+        semantic='ເພດແມ່'
           break;
     }
     return semantic

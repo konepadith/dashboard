@@ -4,26 +4,26 @@
     <h4>Sending Email</h4>
     <form class="example-form" [formGroup]="mail" (ngSubmit)="send()">
       <div class="mb-3">
-        <label for="user_email" class="col-form-label">Send to</label>
+        <label for="user_email" class="col-form-label">ສົ່ງຫາ</label>
         <input [ngClass]="{ 'is-invalid':  m.emailto.invalid && m.emailto.touched }" type="text" class="form-control" id="emailto" formControlName="emailto">
-        <small class="p-error text-danger" *ngIf="m.emailto.hasError('required') &&m.emailto.invalid && m.emailto.touched">Email is require</small>
-        <small class="p-error text-danger" *ngIf="m.emailto.hasError('email') &&m.emailto.invalid && m.emailto.touched">Email is invalid form</small>
+        <small class="p-error text-danger" *ngIf="m.emailto.hasError('required') &&m.emailto.invalid && m.emailto.touched">ຕ້ອງໃສ່ອີເມວກ່ອນ</small>
+        <small class="p-error text-danger" *ngIf="m.emailto.hasError('email') &&m.emailto.invalid && m.emailto.touched">ອີເມວບໍ່ມີໃນລະບົບ</small>
       </div>
       <div class="mb-3">
-        <label for="subject" class="col-form-label">Subject</label>
+        <label for="subject" class="col-form-label">ເລື່ອງ</label>
         <input [ngClass]="{ 'is-invalid':  m.subject.invalid && m.subject.touched }" type="text" class="form-control" id="subject" formControlName="subject">
-        <small class="p-error text-danger" *ngIf="m.subject.hasError('required') &&m.subject.invalid && m.subject.touched">subject is require</small>
+        <small class="p-error text-danger" *ngIf="m.subject.hasError('required') &&m.subject.invalid && m.subject.touched">ຕ້ອງໃສ່ເລື່ອງກ່ອນ</small>
       </div>
       <div class="mb-3">
-        <label for="user_email" class="col-form-label">Send to</label>
-        <textarea [ngClass]="{'is-invalid':  m.text.invalid && m.text.touched }" class="form-control col-md-6" id="text" placeholder="Parent / Child / Aunt / Neighbour" formControlName="text" rows="3"></textarea>
-        <small class="p-error text-danger" *ngIf="m.text.hasError('required') &&m.text.invalid && m.text.touched">Text is require</small>
+        <label for="user_email" class="col-form-label">ເນື້ອໃນ</label>
+        <textarea [ngClass]="{'is-invalid':  m.text.invalid && m.text.touched }" class="form-control col-md-6" id="text" placeholder="ເນື້ອໃນຂໍ້ຄວາມທີ່ຕ້ອງການສົ່ງ" formControlName="text" rows="3"></textarea>
+        <small class="p-error text-danger" *ngIf="m.text.hasError('required') &&m.text.invalid && m.text.touched">ຕ້ອງໃສ່ເນື້ອໃນກ່ອນ</small>
       </div>
-      <button type="submit" class="btn btn-primary" [disabled]="mail.invalid">Send</button>
+      <button type="submit" class="btn btn-primary" [disabled]="mail.invalid">ສົ່ງ</button>
     </form>
   </div>
   <div class="col">
-    <h4>Receiving Email</h4>
+    <h4>ອີເມວທີ່ໄດ້ຮັບ</h4>
     <div *ngFor="let item of receivemail | paginate: { itemsPerPage: 10, currentPage: p }">
       <div class="row mt-2">
         <div class="col">
@@ -33,28 +33,28 @@
         </div>
         <div class="col">
           <button type="button" class="btn btn-primary position-relative" data-bs-toggle="modal" (click)="read(item.receivemail_id);item.receivemail_status=1" attr.data-bs-target="#email{{ item.receivemail_id }}">
-            Read
-            <div style="font-size: 10px;" class="badge bg-danger new-noti" *ngIf="item.receivemail_status==0">new</div>
+            ອ່ານ
+            <div style="font-size: 10px;" class="badge bg-danger new-noti" *ngIf="item.receivemail_status==0">ໃໝ່</div>
           </button>
           <div class="modal fade" id="email{{item.receivemail_id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title fs-6" id="exampleModalLabel" >From: {{ item.receivemail_email }} </h5>
+                  <h5 class="modal-title fs-6" id="exampleModalLabel" >ຈາກ: {{ item.receivemail_email }} </h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  no : {{item.receivemail_id}} <br>
-                  Name : {{item.receivemail_name}} <br>
-                  Surname : {{item.receivemail_surname}} <br>
-                  Topic : {{item.receivemail_topic}} <br>
-                  Message : {{item.receivemail_msg}} <br>
-                  Phone : {{item.receivemail_phone}} <br>
+                  ລຳດັບ : {{item.receivemail_id}} <br>
+                  ຊື່ : {{item.receivemail_name}} <br>
+                  ນາມສະກຸນ : {{item.receivemail_surname}} <br>
+                  ຫົວຂໍ້ : {{item.receivemail_topic}} <br>
+                  ຂໍ້ຄວາມ : {{item.receivemail_msg}} <br>
+                  ເບີໂທ : {{item.receivemail_phone}} <br>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ປິດ</button>
                   <button type="button" class="btn btn-primary" (click)="inputFocus(item.receivemail_email)" data-bs-dismiss="modal">
-                    Answer
+                    ຕອບ
 
                   </button>
                 </div>

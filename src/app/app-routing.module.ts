@@ -7,7 +7,9 @@ import { DogRecoveryComponent } from './modules/dogs/dog-recovery/dog-recovery.c
 import { DogsComponent } from './modules/dogs/dogs.component';
 import { FormComponent } from './modules/form/form.component';
 import { GiverComponent } from './modules/giver/giver.component';
+import { LogInComponent } from './modules/log-in/log-in.component';
 import { MailComponent } from './modules/mail/mail.component';
+import { NotFoundComponent } from './modules/not-found/not-found.component';
 import { PostsComponent } from './modules/posts/posts.component';
 
 const routes: Routes = [{
@@ -44,8 +46,13 @@ const routes: Routes = [{
     path:'dog_recovery',
     component:DogRecoveryComponent
   }
-  ]
-}];
+  ]},
+  {path:'login',
+  component:LogInComponent},
+  {path:'**',
+  component:NotFoundComponent},
+
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

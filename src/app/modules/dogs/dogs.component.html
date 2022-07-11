@@ -19,42 +19,42 @@
     <!-- </ng-container> -->
 
           <ng-container matColumnDef="no">
-            <th mat-header-cell *matHeaderCellDef>No. </th>
+            <th mat-header-cell *matHeaderCellDef>ລຳດັບ </th>
             <td mat-cell *matCellDef="let element"> {{element.dog_id}} </td>
           </ng-container>
 
 
           <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef>Name </th>
+            <th mat-header-cell *matHeaderCellDef>ຊື່</th>
             <td mat-cell *matCellDef="let element"> {{element.dog_name}} </td>
           </ng-container>
 
 
           <ng-container matColumnDef="dob">
-            <th mat-header-cell *matHeaderCellDef>DOB </th>
-            <td mat-cell *matCellDef="let element"> {{element.dog_dob | date:'dd/MM/yyyy'}} | {{ ageFromDateOfBirthday(element.dog_dob) }} Years</td>
+            <th mat-header-cell *matHeaderCellDef>ວັນດືອນປີເກີດ</th>
+            <td mat-cell *matCellDef="let element"> {{element.dog_dob | date:'dd/MM/yyyy'}} | {{ ageFromDateOfBirthday(element.dog_dob) }} ປີ</td>
           </ng-container>
 
           <ng-container matColumnDef="gender">
-            <th mat-header-cell *matHeaderCellDef>Gender </th>
+            <th mat-header-cell *matHeaderCellDef>ເພດ</th>
             <td mat-cell *matCellDef="let element" > {{ dog_gender(element.dog_gender) }}  </td>
           </ng-container>
 
           <ng-container matColumnDef="status">
-            <th mat-header-cell *matHeaderCellDef>Gender </th>
+            <th mat-header-cell *matHeaderCellDef>ສະຖານະ </th>
             <td mat-cell *matCellDef="let element" > {{ element.dog_status }}  </td>
           </ng-container>
 
           <ng-container matColumnDef="giver">
-            <th mat-header-cell *matHeaderCellDef>Giver </th>
+            <th mat-header-cell *matHeaderCellDef>ຜູ້ບໍລິຈາກ </th>
             <td mat-cell *matCellDef="let element" > {{ element.giver_email }}  </td>
           </ng-container>
 
           <ng-container matColumnDef="action">
-            <th mat-header-cell *matHeaderCellDef>Action </th>
+            <th mat-header-cell *matHeaderCellDef>ຈັດການ </th>
             <td mat-cell *matCellDef="let element" class="action-link">
-              <a (click)="Edit(element)" class="link-dark text-decoration-none" style="cursor: pointer;">Edit</a> |
-              <a (click)="Delete(element)" class="link-danger text-decoration-none" style="cursor: pointer;">Delete</a>
+              <a (click)="Edit(element)" class="link-dark text-decoration-none" style="cursor: pointer;">ແກ້ໄຂ</a> |
+              <a (click)="Delete(element)" class="link-danger text-decoration-none" style="cursor: pointer;">ລົບ</a>
                </td>
           </ng-container>
 
@@ -69,7 +69,7 @@
                        aria-label="Select page of periodic elements">
         </mat-paginator>
       </div>
-      <div class="pt-3"><a class="btn btn-primary"routerLinkActive="router-link-active" routerLink="/dog_recovery" role="button">Recovery</a></div>
+      <div class="pt-3"><a class="btn btn-primary"routerLinkActive="router-link-active" routerLink="/dog_recovery" role="button">ກູ້ຄືນ</a></div>
 
     </div>
 
@@ -77,30 +77,30 @@
       <form class="example-form" [formGroup]="addDogs" (ngSubmit)="adddogs()">
         <div class="row">
           <div class="mb-3 col-sm-5">
-            <label for="user_email" class="col-form-label">Name</label>
+            <label for="user_email" class="col-form-label">ຊື່</label>
             <input type="text" class="form-control" formControlName="dog_name" [ngClass]="{ 'is-invalid':  d.dog_name.invalid && d.dog_name.touched }">
-            <small class="p-error text-danger" *ngIf="d.dog_name.hasError('required') &&d.dog_name.invalid && d.dog_name.touched">Name is require</small>
+            <small class="p-error text-danger" *ngIf="d.dog_name.hasError('required') &&d.dog_name.invalid && d.dog_name.touched">ຕ້ອງໃສ່ຊື່ກ່ອນ</small>
           </div>
 
           <div class="mb-3 col-sm-5">
-            <label for="user_email" class="col-form-label">Date Of Birth</label>
+            <label for="user_email" class="col-form-label">ວັນເດືອນປີເກີດ</label>
             <input type="date" class="form-control" formControlName="dog_dob" [ngClass]="{ 'is-invalid':  d.dog_dob.invalid && d.dog_dob.touched }">
-            <small class="p-error text-danger" *ngIf="d.dog_dob.hasError('required') &&d.dog_dob.invalid && d.dog_dob.touched">Date of Birth is require</small>
+            <small class="p-error text-danger" *ngIf="d.dog_dob.hasError('required') &&d.dog_dob.invalid && d.dog_dob.touched">ຕ້ອງໃສ່ວັນເດືອນປີເກີດກ່ອນ</small>
           </div>
 
           <div class="mb-3 col-sm-5 form-check">
-            <label for="user_email" class="col-form-label">Gender</label>
+            <label for="user_email" class="col-form-label">ເພດ</label>
             <div class="row">
               <div class="form-check col-sm-3">
                 <input type="radio" id="girl" class="form-check-input" formControlName="dog_gender" value="0" [ngClass]="{ 'is-invalid':  d.dog_gender.invalid && d.dog_gender.touched }">
               <label class="form-check-label" for="girl">
-                Girl
+                ເພດຜູ້
               </label>
               </div>
               <div class="form-check col-sm-3">
                 <input type="radio" id="boy" class="form-check-input" formControlName="dog_gender" value="1" [ngClass]="{ 'is-invalid':  d.dog_gender.invalid && d.dog_gender.touched }">
               <label class="form-check-label" for="boy">
-                Boy
+                ເພດແມ່
               </label>
               </div>
             </div>
@@ -109,23 +109,25 @@
 
 
           <div class="mb-3 col-sm-5">
-            <label for="user_email" class="col-form-label">Dog Image</label>
+            <label for="user_email" class="col-form-label">ຮູບໝາ</label>
             <input type="file" class="form-control" multiple  formControlName="images" [ngClass]="{ 'is-invalid':  d.images.invalid && d.images.touched }" (change)="uploadno1($event)">
             <!-- <input type="file" class="form-control" multiple  [ngClass]="{ 'is-invalid':  d.images.invalid && d.images.touched }" (change)="save($event)"> -->
-            <small class="p-error text-danger" *ngIf="d.images.hasError('required') &&d.images.invalid && d.images.touched">Dog Images is require</small>
+            <small class="p-error text-danger" *ngIf="d.images.hasError('required') &&d.images.invalid && d.images.touched">ຕ້ອງໃສ່ຮູບກ່ອນ
+            </small>
           </div>
 
           <div class="mb-3 col-sm-5">
-            <label for="user_email" class="col-form-label">Dog species</label>
+            <label for="user_email" class="col-form-label">ສາຍພັນໝາ</label>
             <input type="text" class="form-control" formControlName="dog_species" [ngClass]="{ 'is-invalid':  d.dog_species.invalid && d.dog_species.touched }">
-            <small class="p-error text-danger" *ngIf="d.dog_species.hasError('required') &&d.dog_species.invalid && d.dog_species.touched">Dog Species is require</small>
+            <small class="p-error text-danger" *ngIf="d.dog_species.hasError('required') &&d.dog_species.invalid && d.dog_species.touched">ຕ້ອງໃສ່ພັນໝາກ່ອນ
+            </small>
           </div>
           <div class="mb-3 col-sm-5">
-            <label for="user_email" class="col-form-label">Giver Email</label>
+            <label for="user_email" class="col-form-label">ອີເມວຜູ້ບໍລິຈາກໝາ</label>
             <input type="text" class="form-control" formControlName="giver_email" [ngClass]="{ 'is-invalid':  d.giver_email.invalid && d.giver_email.touched }">
-            <small class="p-error text-danger" *ngIf="d.giver_email.hasError('required') &&d.giver_email.invalid && d.giver_email.touched">Dog Species is require</small>
+            <small class="p-error text-danger" *ngIf="d.giver_email.hasError('required') &&d.giver_email.invalid && d.giver_email.touched">ຕ້ອງໃສ່ອີເມວກ່ອນ</small>
           </div>
-          <button type="submit" class="btn btn-primary form-control" [disabled]="addDogs.invalid">Add</button>
+          <button type="submit" class="btn btn-primary form-control" [disabled]="addDogs.invalid">ເພີ່ມ</button>
         </div>
       </form>
 
