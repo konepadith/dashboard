@@ -93,7 +93,7 @@
           <small class="p-error text-danger" *ngIf="e.event_date.hasError('required') &&e.event_date.invalid && e.event_date.touched">ຕ້ອງໃສ່່ວັນເດືອນປີເກີດກ່ອນ</small>
         </div>
 
-        <div class="mb-3 col-sm-5 form-check">
+        <!-- <div class="mb-3 col-sm-5 form-check">
           <label for="user_email" class="col-form-label">ເພດ</label>
           <div class="row">
             <div class="form-check col-sm-3">
@@ -109,7 +109,7 @@
             </label>
             </div>
           </div>
-        </div>
+        </div> -->
         <div class="mb-3 col-sm-5">
           <label for="user_email" class="col-form-label">ກິດຈະກຳເລີ່ມ</label>
           <input type="text" class="form-control" formControlName="event_start" [ngClass]="{ 'is-invalid':  e.event_start.invalid && e.event_start.touched }">

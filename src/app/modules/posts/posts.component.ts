@@ -52,8 +52,37 @@ export class PostsComponent implements OnInit {
     })
   }
   get e() { return this.addEvent.controls; }
-  addevent(){
 
+  addevent(){
+      this.service.add_events(this.addEvent.value).subscribe(response=>{
+        console.log(response)
+
+
+        if (response.status==1) {
+          this.addEvent=this.fb.group({
+            admin_id:[this.admin_info.data[0].admin_id,Validators.required],
+            event_topic:       [null,Validators.required],
+            event_date:        [null,Validators.required],
+            event_start:     [null,Validators.required],
+            event_end:    [null,Validators.required],
+            event_place:         [null,Validators.required],
+            event_direction:         [null,Validators.required],
+            event_status:    [null,Validators.email],
+          })
+          this.service.events_data_adm().subscribe(response=>{
+            console.log(response)
+            this.data=response.data
+            this.dataSource = new MatTableDataSource(this.data);
+            this.dataSource.paginator = this.paginator;
+          })
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Sonething went wrong',
+            text: 'Please contact supporter',
+            })
+        }
+      })
   }
 
   switch(event:any,event_id:any){
