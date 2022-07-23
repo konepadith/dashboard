@@ -19,6 +19,8 @@ export class PostsComponent implements OnInit {
   addEvent:any = FormGroup
   @ViewChild(MatPaginator,{static:true}) paginator!: MatPaginator;
   @ViewChild(MatTable,{static:true}) table!: MatTable<any>;
+
+  admin_info=JSON.parse(localStorage.getItem("user") || "[]")
   switches = new Subject<any>();
   constructor(private service : DashboardService,
     private fb:FormBuilder,
@@ -32,6 +34,7 @@ export class PostsComponent implements OnInit {
 
   ngOnInit(): void {
     this.addEvent=this.fb.group({
+      admin_id:[this.admin_info.data[0].admin_id,Validators.required],
       event_topic:       [null,Validators.required],
       event_date:        [null,Validators.required],
       event_start:     [null,Validators.required],

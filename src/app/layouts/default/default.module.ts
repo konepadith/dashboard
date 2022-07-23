@@ -27,6 +27,8 @@ import { FormComponent } from 'src/app/modules/form/form.component';
 import { MatSortModule } from '@angular/material/sort';
 
 import { GiverComponent } from 'src/app//modules/giver/giver.component';
+import { LogInComponent } from 'src/app/modules/log-in/log-in.component';
+import { DonateCashComponent } from 'src/app/modules/donate-cash/donate-cash.component';
 @NgModule({
   declarations: [
     DefaultComponent,
@@ -38,7 +40,9 @@ import { GiverComponent } from 'src/app//modules/giver/giver.component';
     DogEditComponent,
     FormComponent,
     GiverComponent,
-    DogRecoveryComponent
+    DogRecoveryComponent,
+    LogInComponent,
+    DonateCashComponent,
   ],
   imports: [
     CommonModule,

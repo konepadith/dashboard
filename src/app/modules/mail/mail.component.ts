@@ -12,10 +12,14 @@ export class MailComponent implements OnInit {
   mail:any = FormGroup;
   receivemail:any
   p: number = 1;
+
+  admin_info=JSON.parse(localStorage.getItem("user") || "[]")
   constructor(private fb:FormBuilder,private spinner : NgxSpinnerService,private service:DashboardService) { }
 
   ngOnInit(): void {
     this.mail = this.fb.group({
+
+      admin_id:[this.admin_info.data[0].admin_id,Validators.required],
       emailto:[null,Validators.compose([Validators.required,Validators.email])],
       subject:[null,Validators.required],
       text:[null,Validators.required]

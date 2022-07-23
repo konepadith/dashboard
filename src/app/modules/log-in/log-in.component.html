@@ -1,13 +1,13 @@
 <div class="cover-all">
-  <form class="login-form">
+  <form class="login-form" [formGroup]="Login" (ngSubmit)="submit_login()">
     <p class="login-text">
       <span class="fa-stack fa-lg">
         <i class="fa fa-circle fa-stack-2x"></i>
         <i class="fa fa-lock fa-stack-1x"></i>
       </span>
     </p>
-    <input type="email" class="login-username" autofocus="true" required="true" placeholder="ອີເມວ" />
-    <input type="password" class="login-password" required="true" placeholder="ລະຫັດ" />
+    <input type="email" class="login-username" formControlName="admin_email" autofocus="true" required="true" placeholder="ອີເມວ" />
+    <input type="password" class="login-password" formControlName="admin_password"  required="true" placeholder="ລະຫັດ" />
     <input type="submit" name="Login" value="Login" class="login-submit" />
   </form>
   <a href="#" class="login-forgot-pass">ລືມລະຫັດ?</a>

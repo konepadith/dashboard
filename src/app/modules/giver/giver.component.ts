@@ -37,11 +37,12 @@ export class GiverComponent implements OnInit {
 
   giver_district='' //give default value for Show Selected option default
   giver_village='' //give default value for Show Selected option default
-
+  admin_info=JSON.parse(localStorage.getItem("user") || "[]")
   constructor(private service : DashboardService,private fb:FormBuilder,private cd: ChangeDetectorRef,private router:Router) { }
 
   ngOnInit(): void {
     this.Registration = this.fb.group({
+      admin_id:[this.admin_info.data[0].admin_id,Validators.required],
       giver_name:        [null,Validators.required],
       giver_surname:     [null,Validators.required],
       giver_gender:      [null,Validators.required],

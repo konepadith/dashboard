@@ -1,0 +1,176 @@
+{
+    "isTrusted": true,
+    "delegateTarget": {
+        "location": {
+            "ancestorOrigins": {},
+            "href": "http://localhost:4200/dogs",
+            "origin": "http://localhost:4200",
+            "protocol": "http:",
+            "host": "localhost:4200",
+            "hostname": "localhost",
+            "port": "4200",
+            "pathname": "/dogs",
+            "search": "",
+            "hash": ""
+        },
+        "uidEvent": 1,
+        "__zone_symbol__clicktrue": [
+            {
+                "type": "eventTask",
+                "state": "scheduled",
+                "source": "HTMLDocument.addEventListener:click",
+                "zone": "<root>",
+                "runCount": 2
+            },
+            {
+                "type": "eventTask",
+                "state": "scheduled",
+                "source": "HTMLDocument.addEventListener:click",
+                "zone": "<root>",
+                "runCount": 2
+            },
+            {
+                "type": "eventTask",
+                "state": "scheduled",
+                "source": "HTMLDocument.addEventListener:click",
+                "zone": "<root>",
+                "runCount": 2
+            },
+            {
+                "type": "eventTask",
+                "state": "scheduled",
+                "source": "HTMLDocument.addEventListener:click",
+                "zone": "<root>",
+                "runCount": 2
+            },
+            {
+                "type": "eventTask",
+                "state": "scheduled",
+                "source": "HTMLDocument.addEventListener:click",
+                "zone": "<root>",
+                "runCount": 2
+            },
+            {
+                "type": "eventTask",
+                "state": "scheduled",
+                "source": "HTMLDocument.addEventListener:click",
+                "zone": "<root>",
+                "runCount": 2
+            },
+            {
+                "type": "eventTask",
+                "state": "scheduled",
+                "source": "HTMLDocument.addEventListener:click",
+                "zone": "<root>",
+                "runCount": 2
+            },
+            {
+                "type": "eventTask",
+                "state": "scheduled",
+                "source": "HTMLDocument.addEventListener:click",
+                "zone": "<root>",
+                "runCount": 2
+            },
+            {
+                "type": "eventTask",
+                "state": "scheduled",
+                "source": "HTMLDocument.addEventListener:click",
+                "zone": "<root>",
+                "runCount": 2
+            },
+            {
+                "type": "eventTask",
+                "state": "scheduled",
+                "source": "HTMLDocument.addEventListener:click",
+                "zone": "<root>",
+                "runCount": 2
+            },
+            {
+                "type": "eventTask",
+                "state": "scheduled",
+                "source": "HTMLDocument.addEventListener:click",
+                "zone": "<root>",
+                "runCount": 2
+            }
+        ],
+        "__zone_symbol__keydowntrue": [
+            {
+                "type": "eventTask",
+                "state": "scheduled",
+                "source": "HTMLDocument.addEventListener:keydown",
+                "zone": "<root>",
+                "runCount": 0
+            },
+            {
+                "type": "eventTask",
+                "state": "scheduled",
+                "source": "HTMLDocument.addEventListener:keydown",
+                "zone": "<root>",
+                "runCount": 0
+            },
+            {
+                "type": "eventTask",
+                "state": "scheduled",
+                "source": "HTMLDocument.addEventListener:keydown",
+                "zone": "<root>",
+                "runCount": 0
+            }
+        ],
+        "__zone_symbol__clickfalse": [
+            {
+                "type": "eventTask",
+                "state": "scheduled",
+                "source": "HTMLDocument.addEventListener:click",
+                "zone": "<root>",
+                "runCount": 2
+            }
+        ],
+        "__zone_symbol__keyupfalse": [
+            {
+                "type": "eventTask",
+                "state": "scheduled",
+                "source": "HTMLDocument.addEventListener:keyup",
+                "zone": "<root>",
+                "runCount": 0
+            }
+        ],
+        "__zone_symbol__mousedowntrue": [
+            {
+                "type": "eventTask",
+                "state": "scheduled",
+                "source": "HTMLDocument.addEventListener:mousedown",
+                "zone": "<root>",
+                "runCount": 2
+            }
+        ],
+        "__zone_symbol__touchstarttrue": [
+            {
+                "type": "eventTask",
+                "state": "scheduled",
+                "source": "HTMLDocument.addEventListener:touchstart",
+                "zone": "<root>",
+                "runCount": 0
+            }
+        ],
+        "__zone_symbol__focustrue": [
+            {
+                "type": "eventTask",
+                "state": "scheduled",
+                "source": "HTMLDocument.addEventListener:focus",
+                "zone": "<root>",
+                "runCount": 0
+            }
+        ],
+        "__zone_symbol__blurtrue": [
+            {
+                "type": "eventTask",
+                "state": "scheduled",
+                "source": "HTMLDocument.addEventListener:blur",
+                "zone": "<root>",
+                "runCount": 0
+            }
+        ],
+        "__zone_symbol__scrollfalse": null,
+        "__zone_symbol__ON_PROPERTYscroll": null
+    }
+}

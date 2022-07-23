@@ -1,4 +1,4 @@
-<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "default" color = "#fff" type = "square-jelly-box" [fullScreen] = "true"><p style="color: white" >ສົ່ງ</p></ngx-spinner>
+<!-- <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "default" color = "#fff" type = "square-jelly-box" [fullScreen] = "true"><p style="color: white" >ສົ່ງ</p></ngx-spinner>
 <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="20px">
   <div fxFlex="50">
     <div class="mat-elevation-z8">
@@ -181,4 +181,189 @@
 </div>
 
 
+<input type="text" (keyup.enter)="sendit($event)" /> -->
+
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "default" color = "#fff" type = "square-jelly-box" [fullScreen] = "true"><p style="color: white" >ກຳລັງສົ່ງ</p></ngx-spinner>
+<div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="20px">
+  <div fxFlex="50">
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" #mytable matSort (matSortChange)="announceSortChange($event)" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="no">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by no">ລຳດັບ</th>
+          <td mat-cell *matCellDef="let element">  {{element.form_id}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="user_name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Name">ຊື່</th>
+          <td mat-cell *matCellDef="let element"> {{element.user_name}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="dog_name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by dog">ຊື່ໝາ</th>
+          <td mat-cell *matCellDef="let element">  {{element.dog_name}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="form_status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Status">ສະຖານະ</th>
+          <td mat-cell *matCellDef="let element" [ngClass]="{'text-secondary':element.form_status==0,'text-success':element.form_status==1,'text-danger':element.form_status==2}"> {{statusshow(element.form_status)}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by no">ກິດຈະກຳ</th>
+          <td mat-cell *matCellDef="let element" class="action-link">
+            <a class="link-dark text-decoration-none" style="cursor: pointer;" (click)="read(element)">ອ່ານ</a>
+           <span *ngIf="element.form_status==0">
+            |
+            <a class="link-success text-decoration-none" style="cursor: pointer;" (click)="accept(element,1)">ຍອມຮັບ</a> |
+            <a class="link-danger text-decoration-none" style="cursor: pointer;" (click)="decline(element,2)">ປະຕິເສດ</a>
+           </span>
+             </td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator [length]="data.length"
+                    [pageSize]="10"
+                     showFirstLastButtons
+                     aria-label="Select page of periodic elements">
+      </mat-paginator>
+    </div>
+  </div>
+  <div fxFlex="50">
+    <div class="row mb-5" *ngFor="let item of formList" >
+      <div class=" col-md-6 mb-3">
+        <p>1. ເຈົ້າເປັນເຈົ້າຂອງ ຫຼື ເຊົ່າເຮືອນ ຫຼື ຫ້ອງແຖວບໍ?</p>
+        <div class="row ps-3">
+          <div class="col-md-2 form-check">
+
+            <label class="form-check-label fw-bolder" [ngClass]="{'text-warning':item.q_1==1,'text-success':item.q_1==2}" for="q_1_yes" >
+              {{answer(item.q_1)}}
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class=" col-md-6 mb-3">
+        <p>2. ຖ້າເຈົ້າເຊົ່າຫ້ອງ, ເຂົາເຈົ້າອານູຍາດໃຫ້ລ້ຽງສັດບໍ່?</p>
+        <div class="row ps-3">
+          <div class="col-md-2 form-check">
+            <label class="form-check-label fw-bolder" [ngClass]="{'text-success':item.q_3==1,'text-danger':item.q_3==2,'text-secondary':item.q_3==3}" for="q_2_yes">
+              {{otheranswer(item.q_2)}}
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class=" col-md-6 mb-3">
+        <p>3. ມີການຈຳກັດນໍ້າໜັກຫຼືບໍ່?</p>
+        <div class="row ps-3">
+          <div class="col-md-2 form-check">
+            <label class="form-check-label fw-bolder" [ngClass]="{'text-success':item.q_3==1,'text-danger':item.q_3==2,'text-secondary':item.q_3==3}" for="q_3_yes">
+              {{otheranswer(item.q_3)}}
+            </label>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="examplFormControlInput1" class="form-label">4. ຈຳກັດນ້ຳໜັກເທົ່າໃດ?</label>
+        <p class="bg-light fw-bolder border border-secondary p-2 rounded">{{item.q_4}}</p>
+      </div>
+      <div class=" col-md-6 mb-3">
+        <p>5. ມີຄ່າມັດຈຳໃນການລ້ຽງສັດບໍ່?</p>
+        <div class="row ps-3">
+          <div class="col-md-2 form-check">
+            <label class="form-check-label" [ngClass]="{'text-success':item.q_5==1,'text-warning':item.q_5==2,'text-danger':item.q_5==3}" for="q_5_yes">
+              {{otheranswer(item.q_5)}}
+            </label>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="examplFormControlInput1" class="form-label">6. ມັດຈຳເທົ່າໃດ?</label>
+        <p class="bg-light fw-bolder border border-secondary p-2 rounded">{{item.q_6}}</p>
+      </div>
+      <hr>
+      <div class=" col-md-6 mb-3">
+        <p>7. ເຈົ້າເດີນທາງຕະຫຼອດບໍ່?</p>
+        <div class="row ps-3">
+          <div class="col-md-3 form-check">
+            <label class="form-check-label" [ngClass]="{'text-success':item.q_7==3,'text-warning':item.q_7==2,'text-danger':item.q_7==1}" for="q_7_yes">
+              {{fanswer(item.q_7)}}
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="examplFormControlInput1" class="form-label">8. ຖ້າເຈົ້າອອກໄປຕ່າງແຂວງ , ເຈົ້າຈະນຳເອົາສັດລ້ຽງໄປໄວ້ໃສ່?</label>
+          <p class="bg-light fw-bolder border border-secondary p-2 rounded">{{item.q_8}}</p>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="examplFormControlInput1" class="form-label">9. ເຈົ້າຈະປ່ອຍໃຫ້ໝາຢູ່ຕາມລຳພັງຈັກຊົ່ວໂມງ?</label>
+        <p class="bg-light fw-bolder border border-secondary p-2 rounded">{{item.q_9}}</p>
+      </div>
+      <div class="col-md-6 mb-3 ">
+        <label for="examplFormControlInput1" class="form-label">10. ເຈົ້າຈະເອົາໝາໄປໄວ້ໃສ່່ໃນລະຫວ່າງມື້?</label>
+        <p class="bg-light fw-bolder border border-secondary p-2 rounded">{{item.q_10}}</p>
+      </div>
+      <div class="col-md-6 mb-3 ">
+        <label for="examplFormControlInput1" class="form-label">11. ເຈົ້າຈະລ້ຽງໝາຕົວນີ້ດົນສຳໃດ?</label>
+        <p class="bg-light fw-bolder border border-secondary p-2 rounded">{{item.q_11}}</p>
+      </div>
+      <div class="col-md-6 mb-3 ">
+        <label for="examplFormControlInput1" class="form-label">12. ຖ້າເຈົ້າວ່າງງານ ຫຼື ຍ້າຍໄປຢູ່ບ່ອນອື່ນ, ຫຼື ໝາໃຫ່ຍຂື້ນກວາທີ່ເຈົ້າຄິດ,
+          ເຈົ້າຈະເຮັດແນວໃດກັບໝາຕົວນັ້ນ?</label>
+          <p class="bg-light fw-bolder border border-secondary p-2 rounded">{{item.q_12}}</p>
+      </div>
+      <hr>
+      <div class="col-md-6 mb-3 ">
+        <label for="examplFormControlInput1" class="form-label">13.ໝາຈະຢູ່ແນວໃດໃນມື້ທີ່ອາກາດບໍ່ດີ?</label>
+        <p class="bg-light fw-bolder border border-secondary p-2 rounded">{{item.q_13}}</p>
+      </div>
+      <div class="col-md-6 mb-3 ">
+        <label for="examplFormControlInput1" class="form-label">14.ເຈົ້າຈະວາງແຜນໃນການລ້ຽງໝາຂອງເຈົ້າແນວໃດ?</label>
+        <p class="bg-light fw-bolder border border-secondary p-2 rounded">{{item.q_14}}</p>
+      </div>
+      <div class="col-md-6 mb-3 ">
+        <label for="examplFormControlInput1" class="form-label">15. ຖ້າໝາຂອງເຈົ້າມີພຶດຕິກຳຜິດປົກກະຕິ, ຂຸດຄຸຸຸ່ຍ, ແລະ ອື່ນໆ, ເຈົ້າຈະເຮັດແນວໃດ?</label>
+        <p class="bg-light fw-bolder border border-secondary p-2 rounded">{{item.q_15}}</p>
+      </div>
+      <div class="col-md-6 mb-3 ">
+        <label for="examplFormControlInput1" class="form-label">16. ເຈົ້າຈະຝຶກໝາໃຫ້ຄຳຮູ້ຫຼືບໍ່? ຖ້າຝຶກຝຶກແນວໃດ?</label>
+        <p class="bg-light fw-bolder border border-secondary p-2 rounded">{{item.q_16}}</p>
+      </div>
+      <div class="col-md-6 mb-3 ">
+        <label for="examplFormControlInput1" class="form-label">17. ເປັນຫຍັງຈື່ງຢາກນຳໝາຕົວນີ້ໄປລ້ຽງ?</label>
+        <p class="bg-light fw-bolder border border-secondary p-2 rounded">{{item.q_17}}</p>
+      </div>
+      <div class=" col-md-6 mb-3">
+        <p>18. ເຈົ້າມີສວນຫຍ້າ ແລະ ມີຮົ້ວກັ້ນຫຼືບໍ່?</p>
+        <div class="row ps-3">
+          <div class="col-md-3 form-check">
+
+            <label class="form-check-label fw-bolder" [ngClass]="{'text-success':item.q_18==1,'text-danger':item.q_18==2}" for="q_18_yes">
+              {{otheranswer(item.q_18)}}
+            </label>
+          </div>
+
+        </div>
+        <label for="examplFormControlInput1" class="form-label">19. ຮົ້ວສູ່ງເທົ່າໃດ?</label>
+        <p class="bg-light fw-bolder border border-secondary p-2 rounded">{{item.q_19}}</p>
+      </div>
+      <hr>
+      <div class="col-sm-6">
+        <button class="btn btn-primary col-sm-3 text-center mt-5" *ngIf="item.form_status==1"  type="button" (click)="purchaes(item,3)">ຮັບລ້ຽງ</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
 <!-- <input type="text" (keyup.enter)="sendit($event)" /> -->
+

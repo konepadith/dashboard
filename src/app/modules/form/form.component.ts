@@ -20,6 +20,7 @@ export class FormComponent implements OnInit {
   dataSource : any;
   formList:any=[]
   formdecide:any=FormGroup;
+  admin_info=JSON.parse(localStorage.getItem("user") || "[]")
   @ViewChild(MatPaginator,{static:true}) paginator!: MatPaginator;
   @ViewChild(MatTable,{static:true}) table!: MatTable<any>;
   @ViewChild(MatSort) sort!: MatSort;
@@ -62,6 +63,7 @@ export class FormComponent implements OnInit {
   accept(data:any,status:any){
 
     this.formdecide=this.fb.group({
+      admin_id:[this.admin_info.data[0].admin_id,Validators.required],
       dog_id:     [data.dog_id,Validators.required],
       user_email: [data.user_email,Validators.required],
       form_id:    [data.form_id,Validators.required],
@@ -128,6 +130,7 @@ export class FormComponent implements OnInit {
   }
   decline(data:any,status:any){
     this.formdecide=this.fb.group({
+      admin_id:[this.admin_info.data[0].admin_id,Validators.required],
       dog_id:     [data.dog_id,Validators.required],
       user_email: [data.user_email,Validators.required],
       form_id:    [data.form_id,Validators.required],
@@ -193,6 +196,7 @@ export class FormComponent implements OnInit {
 purchaes(data:any,status:any){
   console.log()
   this.formdecide=this.fb.group({
+    admin_id:[this.admin_info.data[0].admin_id,Validators.required],
     dog_id:     [data.dog_id,Validators.required],
     user_email: [data.user_email,Validators.required],
     form_id:    [data.form_id,Validators.required],

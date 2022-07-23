@@ -19,6 +19,8 @@ export class DogsComponent implements OnInit {
   @ViewChild(MatTable,{static:true}) table!: MatTable<any>;
   myFiles:any
   addDogs:any = FormGroup
+
+  admin_info=JSON.parse(localStorage.getItem("user") || "[]")
   constructor(private service : DashboardService,
               private fb:FormBuilder,
               private cd: ChangeDetectorRef,
@@ -30,6 +32,7 @@ export class DogsComponent implements OnInit {
 
   ngOnInit(): void {
     this.addDogs=this.fb.group({
+      admin_id:[this.admin_info.data[0].admin_id,Validators.required],
       dog_name:       [null,Validators.required],
       dog_dob:        [null,Validators.required],
       dog_gender:     [null,Validators.required],

@@ -1,0 +1,143 @@
+
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "default" color = "#fff" type = "square-jelly-box" [fullScreen] = "true"><p style="color: white" >Processing</p></ngx-spinner>
+<div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="20px">
+  <div fxFlex="60">
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" #mytable>
+         <!-- Checkbox Column -->
+  <!-- <ng-container matColumnDef="select"> -->
+    <!-- <th mat-header-cell *matHeaderCellDef>
+      <mat-checkbox (change)="$event ? masterToggle() : null"
+                    [checked]="selection.hasValue() && isAllSelected()"
+                    [indeterminate]="selection.hasValue() && !isAllSelected()">
+      </mat-checkbox>
+    </th>
+    <td mat-cell *matCellDef="let row">
+      <mat-checkbox (click)="$event.stopPropagation()"
+                    (change)="$event ? selection.toggle(row) : null"
+                    [checked]="selection.isSelected(row)">
+      </mat-checkbox>
+    </td> -->
+  <!-- </ng-container> -->
+
+        <ng-container matColumnDef="no">
+          <th mat-header-cell *matHeaderCellDef>ລຳດັບ </th>
+          <td mat-cell *matCellDef="let element">{{element.donate_cash_id}}  </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>ຊື່</th>
+          <td mat-cell *matCellDef="let element">{{element.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="surname">
+          <th mat-header-cell *matHeaderCellDef>ນາມສະກຸນ</th>
+          <td mat-cell *matCellDef="let element"> {{ element.surname }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef>ອີເມລ</th>
+          <td mat-cell *matCellDef="let element"> {{element.email}}</td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="donate_cash_bill">
+          <th mat-header-cell *matHeaderCellDef>ຜູ້ຮັບເງິນ</th>
+          <td mat-cell *matCellDef="let element">{{element.admin_email}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="donate_cash_price">
+          <th mat-header-cell *matHeaderCellDef>ຍອດເງິນ</th>
+          <td mat-cell *matCellDef="let element" >{{element.donate_cash_price | number}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="donate_cash_for">
+          <th mat-header-cell *matHeaderCellDef>ຈຸດປະສົງບໍລິຈາກ </th>
+          <td mat-cell *matCellDef="let element" > {{element.donate_cash_for}} </td>
+        </ng-container>
+
+        <!-- <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef>ຈັດການ </th>
+          <td mat-cell *matCellDef="let element" class="action-link">
+            <a  class="link-dark text-decoration-none" (click)="edit(element)" style="cursor: pointer;">ແກ້ໄຂ</a> |
+            <a class="link-danger text-decoration-none" style="cursor: pointer;">ລົບ</a>
+             </td>
+        </ng-container> -->
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator [length]="data.length"
+                    [pageSize]="10"
+                     showFirstLastButtons
+                     aria-label="Select page of periodic elements">
+      </mat-paginator>
+    </div>
+    <div class="pt-3"><a class="btn btn-primary"routerLinkActive="router-link-active" routerLink="/dog_recovery" role="button">ກູ້ຄືນ</a></div>
+
+  </div>
+
+  <div fxFlex="40">
+    <form class="example-form" [formGroup]="donateCash" (ngSubmit)="donate()">
+      <div class="row">
+        <div class="mb-3 col-sm-5">
+          <label for="user_email" class="col-form-label">ຊື່</label>
+          <input type="text" class="form-control" formControlName="name" [ngClass]="{ 'is-invalid':  d.name.invalid && d.name.touched }">
+          <small class="p-error text-danger" *ngIf="d.name.hasError('required') &&d.name.invalid && d.name.touched">ຕ້ອງໃສ່ຊື່ກ່ອນ</small>
+        </div>
+        <div class="mb-3 col-sm-5">
+          <label for="user_email" class="col-form-label">ນາມສະກຸນ</label>
+          <input type="text" class="form-control" formControlName="surname" [ngClass]="{ 'is-invalid':  d.surname.invalid && d.surname.touched }">
+          <small class="p-error text-danger" *ngIf="d.surname.hasError('required') &&d.surname.invalid && d.surname.touched">ຕ້ອງໃສ່ຊື່ກ່ອນ</small>
+        </div>
+        <div class="mb-3 col-sm-5">
+          <label for="user_email" class="col-form-label">ອີເມລ</label>
+          <input type="text" class="form-control" formControlName="email" [ngClass]="{ 'is-invalid':  d.email.invalid && d.email.touched }">
+          <small class="p-error text-danger" *ngIf="d.email.hasError('required') &&d.email.invalid && d.email.touched">ຕ້ອງໃສ່ຊື່ກ່ອນ</small>
+        </div>
+        <div class="mb-3 col-sm-5">
+            <label for="user_email" class="col-form-label">ວັນເດືອນປີເກີດ</label>
+            <input type="date" class="form-control" formControlName="dob" [ngClass]="{ 'is-invalid':  d.dob.invalid && d.dob.touched }">
+            <small class="p-error text-danger" *ngIf="d.dob.hasError('required') &&d.dob.invalid && d.dob.touched">ຕ້ອງໃສ່ວັນເດືອນປີເກີດກ່ອນ</small>
+          </div>
+        <div class="mb-3 col-sm-5">
+          <label for="user_email" class="col-form-label">ຍອດເງິນບໍລິຈາກ</label>
+          <input type="text" class="form-control" formControlName="donate_cash_price" [ngClass]="{ 'is-invalid':  d.donate_cash_price.invalid && d.donate_cash_price.touched }">
+          <small class="p-error text-danger" *ngIf="d.donate_cash_price.hasError('required') &&d.donate_cash_price.invalid && d.donate_cash_price.touched">ຕ້ອງໃສ່ຊື່ກ່ອນ</small>
+        </div>
+        <div class="mb-3 col-sm-5">
+          <label for="user_email" class="col-form-label">ບໍລິຈາກເພື່ອ</label>
+          <select class="form-select" id="" [ngClass]="{ 'is-invalid':  d.donate_cash_for.invalid && d.donate_cash_for.touched }" [(ngModel)]="donate_cash_for" formControlName="donate_cash_for">
+            <option disable seleted hidden value="">ບໍລິຈາກເພື່ອ</option>
+            <option value="1">ອາຫານ</option>
+            <option value="2">ຢາ</option>
+          </select>
+          <small class="p-error text-danger" *ngIf="d.donate_cash_for.hasError('required') &&d.donate_cash_for.invalid && d.donate_cash_for.touched">ຕ້ອງໃສ່ຊື່ກ່ອນ</small>
+        </div>
+
+        <!-- <div class="form-control mb-3 col-sm-5">
+          <select class="form-select" id="" [ngClass]="{ 'is-invalid':  d.donate_cash_for.invalid && d.donate_cash_for.touched }" [(ngModel)]="donate_cash_for" formControlName="user_gender">
+            <option disable seleted hidden value="">ບໍລິຈາກເພື່ອ</option>
+            <option value="1">ອາຫານ</option>
+            <option value="2">ຢາ</option>
+          </select>
+          <small class="p-error text-danger" *ngIf="d.donate_cash_for.hasError('required') &&d.donate_cash_for.invalid && d.donate_cash_for.touched">ຕ້ອງໃສ່ຊື່ກ່ອນ</small>
+        </div> -->
+
+
+
+
+        <button type="submit" class="btn btn-primary form-control" [disabled]="donateCash.invalid" *ngIf="!btn">ບັນທຶກ</button>
+        <button type="button" class="btn btn-primary form-control" [disabled]="donateCash.invalid" *ngIf="btn">ແກ້ໄຂ</button>
+        <button type="button" (click)="edit(null)" class="btn btn-primary form-control mt-1" *ngIf="btn">ຍົກເລິກ</button>
+      </div>
+    </form>
+
+    <!-- <input type="file" (change)="upload($event)" multiple> -->
+  </div>
+</div>
+
+

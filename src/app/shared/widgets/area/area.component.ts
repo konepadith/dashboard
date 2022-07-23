@@ -19,10 +19,10 @@ export class AreaComponent implements OnInit {
           type: 'area'
       },
       title: {
-          text: 'Random Data'
+          text: 'ເງິນບໍລິຈາກທັ້ງໝົດ'
       },
       subtitle: {
-          text: 'Demo'
+          text: 'Take me home'
       },
       tooltip: {
           split: true,
