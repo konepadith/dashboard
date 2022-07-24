@@ -13,6 +13,7 @@ import { LogInComponent } from './modules/log-in/log-in.component';
 import { MailComponent } from './modules/mail/mail.component';
 import { NotFoundComponent } from './modules/not-found/not-found.component';
 import { PostsComponent } from './modules/posts/posts.component';
+import { ReportComponent } from './modules/report/report.component';
 
 const routes: Routes = [{
   path:'',
@@ -52,6 +53,10 @@ const routes: Routes = [{
   {
     path:'donatecash',
     component:DonateCashComponent
+  },
+  {
+    path:'report',
+    component:ReportComponent
   }
   ]},
   {path:'login',
