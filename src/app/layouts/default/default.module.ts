@@ -25,10 +25,17 @@ import { DogEditComponent } from 'src/app/modules/dogs/dog-edit/dog-edit.compone
 import { DogRecoveryComponent } from 'src/app/modules/dogs/dog-recovery/dog-recovery.component';
 import { FormComponent } from 'src/app/modules/form/form.component';
 import { MatSortModule } from '@angular/material/sort';
-
+import {MatTabsModule} from '@angular/material/tabs';
 import { GiverComponent } from 'src/app//modules/giver/giver.component';
 import { LogInComponent } from 'src/app/modules/log-in/log-in.component';
 import { DonateCashComponent } from 'src/app/modules/donate-cash/donate-cash.component';
+import { ReportComponent } from 'src/app/modules/report/report.component';
+import { ReportDogComponent } from 'src/app/modules/report/report-dog/report-dog.component';
+import { ReportDonateComponent } from 'src/app/modules/report/report-donate/report-donate.component';
+import { ReportGiverComponent } from 'src/app/modules/report/report-giver/report-giver.component';
+import { ReportUserComponent } from 'src/app/modules/report/report-user/report-user.component';
+import { ReportFormComponent } from 'src/app/modules/report/report-form/report-form.component';
+
 @NgModule({
   declarations: [
     DefaultComponent,
@@ -43,6 +50,12 @@ import { DonateCashComponent } from 'src/app/modules/donate-cash/donate-cash.com
     DogRecoveryComponent,
     LogInComponent,
     DonateCashComponent,
+    ReportComponent,
+    ReportDogComponent,
+    ReportUserComponent,
+    ReportDonateComponent,
+    ReportGiverComponent,
+    ReportFormComponent,
   ],
   imports: [
     CommonModule,
@@ -61,7 +74,8 @@ import { DonateCashComponent } from 'src/app/modules/donate-cash/donate-cash.com
     NgxPaginationModule,
     MatDialogModule,
     MatCheckboxModule,
-    MatSortModule
+    MatSortModule,
+    MatTabsModule,
   ],
   providers:[
     DashboardService

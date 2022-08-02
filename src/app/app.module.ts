@@ -6,14 +6,12 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DefaultModule } from './layouts/default/default.module';
 import { NotFoundComponent } from './modules/not-found/not-found.component';
-import { ReportComponent } from './modules/report/report.component';
-
 
 @NgModule({
   declarations: [
     AppComponent,
     NotFoundComponent,
-    ReportComponent,
+
 
 
   ],

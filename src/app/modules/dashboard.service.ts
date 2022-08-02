@@ -158,4 +158,12 @@ export class DashboardService {
     const url=this.url+'/donateCash'
     return this.http.post<any>(url,data)
   }
+  report_dog(status:any){
+    const url=this.url+'/report_dog?status='+status
+    return this.http.get<any>(url)
+  }
+  report_user(){
+    const url=this.url+'/report_user'
+    return this.http.get<any>(url)
+  }
 }

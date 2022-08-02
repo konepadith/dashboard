@@ -1,0 +1,72 @@
+<div class="container pt-3">
+  <p class="text-center h1">ລາຍງານຂໍ້ມູນໝາທັ້ງໝົດ</p>
+
+
+<div class="row">
+  <div class="col text-end"><button type="button" class="btn btn-outline-danger ms-1" (click)="exportExcel()">Export</button></div>
+</div>
+<div class="pt-5">
+  <table mat-table [dataSource]="dataSource" #mytable>
+    <!-- Checkbox Column -->
+  <!-- <ng-container matColumnDef="select"> -->
+  <!-- <th mat-header-cell *matHeaderCellDef>
+  <mat-checkbox (change)="$event ? masterToggle() : null"
+               [checked]="selection.hasValue() && isAllSelected()"
+               [indeterminate]="selection.hasValue() && !isAllSelected()">
+  </mat-checkbox>
+  </th>
+  <td mat-cell *matCellDef="let row">
+  <mat-checkbox (click)="$event.stopPropagation()"
+               (change)="$event ? selection.toggle(row) : null"
+               [checked]="selection.isSelected(row)">
+  </mat-checkbox>
+  </td> -->
+  <!-- </ng-container> -->
+
+   <ng-container matColumnDef="no">
+     <th mat-header-cell *matHeaderCellDef>ລຳດັບ </th>
+     <td mat-cell *matCellDef="let element, let i = index"> {{i+1}} </td>
+   </ng-container>
+   <ng-container matColumnDef="img">
+    <th mat-header-cell *matHeaderCellDef>ຮູບ </th>
+    <td mat-cell *matCellDef="let element"> <img src="{{element.user_img}} " style="width: 120px;" alt="" srcset=""></td>
+  </ng-container>
+
+   <ng-container matColumnDef="name">
+     <th mat-header-cell *matHeaderCellDef>ຊື່</th>
+     <td mat-cell *matCellDef="let element"> {{element.user_name}} </td>
+   </ng-container>
+
+
+   <ng-container matColumnDef="surname">
+     <th mat-header-cell *matHeaderCellDef>ນາມສະກຸນ</th>
+     <td mat-cell *matCellDef="let element"> {{ element.user_surname }}</td>
+   </ng-container>
+
+  <ng-container matColumnDef="province">
+     <th mat-header-cell *matHeaderCellDef>ແຂວງ</th>
+     <td mat-cell *matCellDef="let element" > {{ element.province }}  </td>
+   </ng-container>
+
+   <ng-container matColumnDef="email">
+     <th mat-header-cell *matHeaderCellDef>ອີເມວ</th>
+     <td mat-cell *matCellDef="let element" > {{ element.user_email }}  </td>
+   </ng-container>
+
+   <ng-container matColumnDef="phone">
+     <th mat-header-cell *matHeaderCellDef>ໝາຍເລກໂທລະສັບ </th>
+     <td mat-cell *matCellDef="let element" > {{ element.user_phoneNumber }}  </td>
+   </ng-container>
+
+
+   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [length]="data.length"
+               [pageSize]="10"
+                showFirstLastButtons
+                aria-label="Select page of periodic elements">
+  </mat-paginator>
+</div>
+</div>

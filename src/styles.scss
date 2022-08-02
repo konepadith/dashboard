@@ -6,3 +6,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   /* bug fix - no overlay */
   display: none;
 }
+*{
+  font-family: 'phetsarath OT';
+}
+.mat-h4, .mat-subheading-1, .mat-typography h4 {
+  font-family: 'phetsarath OT';
+}

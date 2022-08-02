@@ -20,7 +20,7 @@
 
           <ng-container matColumnDef="no">
             <th mat-header-cell *matHeaderCellDef>ລຳດັບ </th>
-            <td mat-cell *matCellDef="let element"> {{element.dog_id}} </td>
+            <td mat-cell *matCellDef="let element, let i = index"> {{i+1}} </td>
           </ng-container>
 
 
@@ -110,7 +110,7 @@
 
           <div class="mb-3 col-sm-5">
             <label for="user_email" class="col-form-label">ຮູບໝາ</label>
-            <input type="file" class="form-control" multiple  formControlName="images" [ngClass]="{ 'is-invalid':  d.images.invalid && d.images.touched }" (change)="uploadno1($event)">
+            <input type="file" accept=".jpg,.jpeg,.png" class="form-control" multiple  formControlName="images" [(ngModel)]="myFiles" [ngClass]="{ 'is-invalid':  d.images.invalid && d.images.touched }" (change)="uploadno1($event)">
             <!-- <input type="file" class="form-control" multiple  [ngClass]="{ 'is-invalid':  d.images.invalid && d.images.touched }" (change)="save($event)"> -->
             <small class="p-error text-danger" *ngIf="d.images.hasError('required') &&d.images.invalid && d.images.touched">ຕ້ອງໃສ່ຮູບກ່ອນ
             </small>
@@ -120,6 +120,12 @@
             <label for="user_email" class="col-form-label">ສາຍພັນໝາ</label>
             <input type="text" class="form-control" formControlName="dog_species" [ngClass]="{ 'is-invalid':  d.dog_species.invalid && d.dog_species.touched }">
             <small class="p-error text-danger" *ngIf="d.dog_species.hasError('required') &&d.dog_species.invalid && d.dog_species.touched">ຕ້ອງໃສ່ພັນໝາກ່ອນ
+            </small>
+          </div>
+          <div class="mb-3 col-sm-5">
+            <label for="user_email" class="col-form-label">ປະຫວັດ</label>
+            <input type="text" class="form-control" formControlName="dog_bg" [ngClass]="{ 'is-invalid':  d.dog_bg.invalid && d.dog_bg.touched }">
+            <small class="p-error text-danger" *ngIf="d.dog_bg.hasError('required') &&d.dog_bg.invalid && d.dog_bg.touched">ຕ້ອງປະຫວັດ
             </small>
           </div>
           <div class="mb-3 col-sm-5">

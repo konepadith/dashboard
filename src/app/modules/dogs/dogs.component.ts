@@ -36,6 +36,7 @@ export class DogsComponent implements OnInit {
       dog_name:       [null,Validators.required],
       dog_dob:        [null,Validators.required],
       dog_gender:     [null,Validators.required],
+      dog_bg:         [null,Validators.required],
       dog_species:    [null,Validators.required],
       giver_email:    [null,Validators.email],
       images:         [null,Validators.required],
@@ -79,7 +80,18 @@ export class DogsComponent implements OnInit {
   }
 
   uploadno1(event:any){
-    this.myFiles = event.target.files
+    let filesNum= event.target.files.length
+    if (filesNum == 2) {
+      this.myFiles = event.target.files
+    } else {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Input error',
+        text: 'Please input only 2 files',
+        })
+        this.myFiles=null
+    }
+
   }
 
   adddogs(){
@@ -104,6 +116,16 @@ export class DogsComponent implements OnInit {
               this.data=response.data
               this.dataSource = new MatTableDataSource(this.data);
               this.dataSource.paginator = this.paginator;
+              })
+              this.addDogs=this.fb.group({
+                admin_id:[this.admin_info.data[0].admin_id,Validators.required],
+                dog_name:       [null,Validators.required],
+                dog_dob:        [null,Validators.required],
+                dog_gender:     [null,Validators.required],
+                dog_bg:         [null,Validators.required],
+                dog_species:    [null,Validators.required],
+                giver_email:    [null,Validators.email],
+                images:         [null,Validators.required],
               })
       } else if (response.status === 3) {
         Swal.fire({
