@@ -76,13 +76,13 @@ this.data.forEach((e:any) => {
         giver_email       :      e.giver_email ,
         dog_name          :      e.dog_name,
         dog_dob           :      moment(e.dog_dob).format("DD/MM/yyyy").toString(),
-        dog_gender        :      e.dog_gender,
+        dog_gender        :      this.dog_gender(e.dog_gender),
         dog_species       :      e.dog_species  ,
         dog_bg            :      e.dog_bg,
         age               :      this.ageFromDateOfBirthday(e.dog_dob),
         dog_status        :      e.dog_status,
-        dog_create_at     :      e.dog_create_at,
-        dog_update_at     :      e.dog_update_at,
+        dog_create_at     :      moment(e.dog_create_at).format("DD/MM/yyyy").toString(),
+        dog_update_at     :      moment(e.dog_update_at).format("DD/MM/yyyy").toString(),
    },"n");
 
 });

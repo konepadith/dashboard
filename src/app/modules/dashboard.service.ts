@@ -166,4 +166,8 @@ export class DashboardService {
     const url=this.url+'/report_user'
     return this.http.get<any>(url)
   }
+  report_form(status:any){
+    const url=this.url+'/report_form?status='+status
+    return this.http.get<any>(url)
+  }
 }

@@ -47,36 +47,31 @@ export class ReportUserComponent implements OnInit {
     let workbook = new Workbook();
     let worksheet = workbook.addWorksheet('DogReport');
     worksheet.columns = [
-      { header: 'ID'            , key: 'user_id',                  width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'admin'         , key: 'user_name',                width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'Giver'         , key: 'user_surname',             width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'Name'          , key: 'user_dob',                 width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'Dob'           , key: 'user_email',               width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'Gender'        , key: 'user_gender',              width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'Species'       , key: 'user_phoneNumber',         width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'Background'    , key: 'user_province',            width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'Age'           , key: 'user_district',            width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'Status'        , key: 'user_village',             width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'Background'    , key: 'province',                 width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'Age'           , key: 'district',                 width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'Status'        , key: 'village',                  width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'Create record' , key: 'dog_create_at',            width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'update recored', key: 'dog_update_at',            width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'Form ID'            , key: 'user_id',                  width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'User ID'         , key: 'user_id',                width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'user Email'         , key: 'user_email',             width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'admin ID'          , key: 'admin_id',                 width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'Admin Email'           , key: 'admin_email',               width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'Dog ID'        , key: 'dog_id',              width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'Dog Name'       , key: 'dog_name',         width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'Question 1'    , key: 'q_1',            width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'district code'      , key: 'user_district',            width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'village code'        , key: 'user_village',             width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'province'    , key: 'province',                 width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'district'           , key: 'district',                 width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'village'        , key: 'village',                  width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'Create record' , key: 'user_create_at',            width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'update recored', key: 'user_update_at',            width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
     ];
 
 this.data.forEach((e:any) => {
-  if(moment(e.date_was_covid).format("DD/MM/yyyy").toString()=='Invalid date'){
-    e.date_was_covid=''
-   }else{
-    e.date_was_covid=moment(e.date_was_covid).format("DD/MM/yyyy").toString()
-   }
   worksheet.addRow({Appointment_date: moment(e.Appointment_date).format("DD/MM/yyyy").toString(),
   user_id                :      e.user_id,
   user_name       :      e.user_name,
   user_surname       :      e.user_surname ,
   user_dob          :      moment(e.user_dob).format("DD/MM/yyyy").toString(),
   user_email           :      e.user_email,
-  user_gender        :      e.dog_gender,
+  user_gender        :      this.user_gender(e.user_gender),
   user_phoneNumber       :      e.user_phoneNumber  ,
   user_province            :      e.user_province,
   user_district               :      e.user_district,
@@ -84,8 +79,8 @@ this.data.forEach((e:any) => {
   province            :      e.province,
   district               :      e.district,
   village        :      e.village,
-  user_create_at     :      e.dog_create_at,
-  user_update_at     :      e.dog_update_at,
+  user_create_at     :     moment(e.user_create_at).format("DD/MM/yyyy").toString(),
+  user_update_at     :      moment(e.user_update_at).format("DD/MM/yyyy").toString(),
    },"n");
 
 });
@@ -106,14 +101,14 @@ this.data.forEach((e:any) => {
     }
     return age;
   }
-  dog_gender(status:any){
+  user_gender(status:any){
     let semantic
     switch (status) {
       case 0:
-        semantic='ເພດຜູ້'
+        semantic='ເພdຊາຍ'
           break;
       case 1:
-        semantic='ເພດແມ່'
+        semantic='ເພດຍິງ'
           break;
     }
     return semantic
