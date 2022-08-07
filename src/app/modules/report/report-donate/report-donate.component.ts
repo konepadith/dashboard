@@ -14,9 +14,13 @@ import * as moment from 'moment';
   styleUrls: ['./report-donate.component.scss']
 })
 export class ReportDonateComponent implements OnInit {
-  displayedColumns: string[] = ['no','img','dog_name','user_img' ,'user_email', 'admin_email', 'form_status'];
+  displayedColumns: string[] = ['no','user_name','donate_price','donate_bill' ,'donate_create_at'];
   data:any=[]
   dataSource : any;
+
+  displayedColumns2: string[] = ['no','name','donate_cash_price','donate_cash_bill' ,'donate_create_at'];
+  data2:any=[]
+  dataSource2 : any;
   @ViewChild(MatPaginator,{static:true}) paginator!: MatPaginator;
   @ViewChild(MatTable,{static:true}) table!: MatTable<any>;
   constructor(private service : DashboardService,
@@ -24,13 +28,21 @@ export class ReportDonateComponent implements OnInit {
     private spinner : NgxSpinnerService) { }
 
   ngOnInit(): void {
-    this.service.report_form('101').subscribe(response=>{
+    this.service.report_donate().subscribe(response=>{
       this.data=response.data
       console.log(this.data)
       this.dataSource = new MatTableDataSource(this.data);
       this.dataSource.paginator = this.paginator;
       })
+      this.service.report_donate_cash().subscribe(response=>{
+        this.data2=response.data
+        console.log(this.data2)
+        this.dataSource2 = new MatTableDataSource(this.data2);
+        this.dataSource2.paginator = this.paginator;
+        })
   }
+
+
   report(status:any){
     this.service.report_form(status).subscribe(response=>{
       this.data=response.data
@@ -116,5 +128,21 @@ this.data.forEach((e:any) => {
       fs.saveAs(blob, 'dogs.xlsx');
     })
 
+  }
+
+  DonateSum(donate:any){
+    let sum = 0;
+    for (let index = 0; index < donate.length; index++) {
+      sum += donate[index].donate_price;
+    }
+    return sum
+  }
+
+  DonateSum2(donate:any){
+    let sum = 0;
+    for (let index = 0; index < donate.length; index++) {
+      sum += donate[index].donate_cash_price;
+    }
+    return sum
   }
 }

@@ -1,63 +1,107 @@
-<div class="container pt-3">
+<div class="container-fluid pt-3">
   <p class="text-center h1">ລາຍງານຂໍ້ມູນບໍລິຈາກທັ້ງໝົດ</p>
 
 
 <div class="row">
-  <!-- <div class="col text-start">
-    <button type="button" class="btn btn-outline-dark ms-0" (click)="report('101')">ສະແດງທັິ້ງໝົດ</button>
-  <button type="button" class="btn btn-outline-dark ms-2" (click)="report('0')">ລໍຖ້າ</button>
-<button type="button" class="btn btn-outline-dark ms-2" (click)="report('1')">ຍອມຮັບ</button>
-<button type="button" class="btn btn-outline-dark ms-2" (click)="report('2')">ປະຕິເສດ</button>
-<button type="button" class="btn btn-outline-dark ms-2" (click)="report('3')">ຮັບລ້ຽງສຳເລັດ</button>
-  </div> -->
-  <div class="col text-end"><button type="button" class="btn btn-outline-danger ms-1" (click)="exportExcel()">Export</button></div>
-</div>
-<div class="pt-5">
-  <table mat-table [dataSource]="dataSource" #mytable>
-   <ng-container matColumnDef="no">
-     <th mat-header-cell *matHeaderCellDef>ລຳດັບ </th>
-     <td mat-cell *matCellDef="let element, let i = index"> {{element.form_id}} </td>
-   </ng-container>
-   <ng-container matColumnDef="img">
-    <th mat-header-cell *matHeaderCellDef>ຮູບໝາ </th>
-    <td mat-cell *matCellDef="let element"> <img src="{{element.dog_img}} " style="width: 120px;" alt="" srcset=""></td>
-  </ng-container>
+  <div class="col">
+    <div class="row">
+      <!-- <div class="col text-start">
+        <button type="button" class="btn btn-outline-dark ms-0" (click)="report('101')">ສະແດງທັິ້ງໝົດ</button>
+      <button type="button" class="btn btn-outline-dark ms-2" (click)="report('0')">ລໍຖ້າ</button>
+    <button type="button" class="btn btn-outline-dark ms-2" (click)="report('1')">ຍອມຮັບ</button>
+    <button type="button" class="btn btn-outline-dark ms-2" (click)="report('2')">ປະຕິເສດ</button>
+    <button type="button" class="btn btn-outline-dark ms-2" (click)="report('3')">ຮັບລ້ຽງສຳເລັດ</button>
+      </div> -->
+      <p class="text-start h5">ລວມຢອດເງິນທັງໝົດ {{DonateSum(this.data) | number}}</p>
+      <div class="col text-end"><button type="button" class="btn btn-outline-danger ms-1" (click)="exportExcel()">Export</button></div>
+    </div>
+    <div class="pt-5">
+      <table mat-table [dataSource]="dataSource" #mytable>
+       <ng-container matColumnDef="no">
+         <th mat-header-cell *matHeaderCellDef>ລຳດັບ </th>
+         <td mat-cell *matCellDef="let element, let i = index"> {{element.donate_id}} </td>
+       </ng-container>
 
-   <ng-container matColumnDef="dog_name">
-    <th mat-header-cell *matHeaderCellDef>ຊື່ໝາ </th>
-    <td mat-cell *matCellDef="let element">{{element.dog_name}}</td>
-  </ng-container>
+       <ng-container matColumnDef="user_name">
+        <th mat-header-cell *matHeaderCellDef>ຜູ້ບໍລິຈາກ </th>
+        <td mat-cell *matCellDef="let element">{{element.user_name}}</td>
+      </ng-container>
 
-  <ng-container matColumnDef="user_img">
-    <th mat-header-cell *matHeaderCellDef>ຮູບຜູູ້ຮ້ອງຂໍ </th>
-    <td mat-cell *matCellDef="let element"> <img src="{{element.user_img}} " style="width: 120px;" alt="" srcset=""></td>
-  </ng-container>
+       <ng-container matColumnDef="donate_price">
+         <th mat-header-cell *matHeaderCellDef>ຢອດເງິນ</th>
+         <td mat-cell *matCellDef="let element"> {{element.donate_price}} </td>
+       </ng-container>
 
-   <ng-container matColumnDef="user_email">
-     <th mat-header-cell *matHeaderCellDef>ອີເມວ ຜູ້ຮ້ອງຂໍ</th>
-     <td mat-cell *matCellDef="let element"> {{element.user_email}} </td>
-   </ng-container>
+       <ng-container matColumnDef="donate_bill">
+        <th mat-header-cell *matHeaderCellDef>ທີ່ຢູ່ໃບບິນ </th>
+        <td mat-cell *matCellDef="let element">{{element.donate_bill}}</td>
+      </ng-container>
 
+       <ng-container matColumnDef="donate_create_at">
+         <th mat-header-cell *matHeaderCellDef>ວັນເດືອນປີ</th>
+         <td mat-cell *matCellDef="let element"> {{ element.donate_create_at | date:'dd/MM/yyyy'  }}</td>
+       </ng-container>
 
-   <ng-container matColumnDef="admin_email">
-     <th mat-header-cell *matHeaderCellDef>ຜູ້ຕັດສິນ</th>
-     <td mat-cell *matCellDef="let element"> {{ element.admin_email }}</td>
-   </ng-container>
+       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
 
-  <ng-container matColumnDef="form_status">
-     <th mat-header-cell *matHeaderCellDef>ສະຖານະ</th>
-     <td mat-cell *matCellDef="let element" [ngClass]="{'text-secondary':element.form_status==0,'text-success':element.form_status==1,'text-danger':element.form_status==2}"> {{ element.form_status  }}  </td>
-   </ng-container>
+      <mat-paginator [length]="data.length"
+                   [pageSize]="10"
+                    showFirstLastButtons
+                    aria-label="Select page of periodic elements">
+      </mat-paginator>
+    </div>
+  </div>
+  <div class="col">
+    <div class="row">
+      <!-- <div class="col text-start">
+        <button type="button" class="btn btn-outline-dark ms-0" (click)="report('101')">ສະແດງທັິ້ງໝົດ</button>
+      <button type="button" class="btn btn-outline-dark ms-2" (click)="report('0')">ລໍຖ້າ</button>
+    <button type="button" class="btn btn-outline-dark ms-2" (click)="report('1')">ຍອມຮັບ</button>
+    <button type="button" class="btn btn-outline-dark ms-2" (click)="report('2')">ປະຕິເສດ</button>
+    <button type="button" class="btn btn-outline-dark ms-2" (click)="report('3')">ຮັບລ້ຽງສຳເລັດ</button>
+      </div> -->
+      <p class="text-start h5">ລວມຢອດເງິນທັງໝົດ {{DonateSum2(this.data2) | number}}</p>
+      <div class="col text-end"><button type="button" class="btn btn-outline-danger ms-1" (click)="exportExcel()">Export</button></div>
+    </div>
+    <div class="pt-5">
+      <table mat-table [dataSource]="dataSource2" #mytable>
+       <ng-container matColumnDef="no">
+         <th mat-header-cell *matHeaderCellDef>ລຳດັບ </th>
+         <td mat-cell *matCellDef="let element, let i = index"> {{element.donate_cash_id}} </td>
+       </ng-container>
 
+       <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>ຜູ້ບໍລິຈາກ </th>
+        <td mat-cell *matCellDef="let element">{{element.name}}</td>
+      </ng-container>
 
-   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+       <ng-container matColumnDef="donate_cash_price">
+         <th mat-header-cell *matHeaderCellDef>ຢອດເງິນ</th>
+         <td mat-cell *matCellDef="let element"> {{element.donate_cash_price}} </td>
+       </ng-container>
 
-  <mat-paginator [length]="data.length"
-               [pageSize]="10"
-                showFirstLastButtons
-                aria-label="Select page of periodic elements">
-  </mat-paginator>
+       <ng-container matColumnDef="donate_cash_bill">
+        <th mat-header-cell *matHeaderCellDef>ທີ່ຢູ່ໃບບິນ </th>
+        <td mat-cell *matCellDef="let element">{{element.donate_cash_bill}}</td>
+      </ng-container>
+
+       <ng-container matColumnDef="donate_create_at">
+         <th mat-header-cell *matHeaderCellDef>ວັນເດືອນປີ</th>
+         <td mat-cell *matCellDef="let element"> {{ element.donate_cash_create_at | date:'dd/MM/yyyy'  }}</td>
+       </ng-container>
+
+       <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+       <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+      </table>
+
+      <mat-paginator [length]="data.length"
+                   [pageSize]="10"
+                    showFirstLastButtons
+                    aria-label="Select page of periodic elements">
+      </mat-paginator>
+    </div>
+  </div>
 </div>
 </div>
