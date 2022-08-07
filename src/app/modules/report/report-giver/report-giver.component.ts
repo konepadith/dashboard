@@ -24,7 +24,7 @@ export class ReportGiverComponent implements OnInit {
     private spinner : NgxSpinnerService) { }
 
   ngOnInit(): void {
-    this.service.report_user().subscribe(response=>{
+    this.service.report_giver().subscribe(response=>{
       this.data=response.data
       console.log(this.data)
       this.dataSource = new MatTableDataSource(this.data);

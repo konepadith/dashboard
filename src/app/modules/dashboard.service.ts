@@ -178,4 +178,8 @@ export class DashboardService {
     const url=this.url+'/report_donate_cash'
     return this.http.get<any>(url)
   }
+  report_giver(){
+    const url=this.url+'/report_giver'
+    return this.http.get<any>(url)
+  }
 }
