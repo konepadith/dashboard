@@ -33,7 +33,7 @@
         <ng-container matColumnDef="action">
           <th mat-header-cell *matHeaderCellDef>ຈັດການ</th>
           <td mat-cell *matCellDef="let element" class="action-link">
-            <a (click)="Edit(element)" class="link-dark text-decoration-none" style="cursor: pointer;">ແກ້ໄຂ</a> |
+            <a (click)="edit(element)" class="link-dark text-decoration-none" style="cursor: pointer;">ແກ້ໄຂ</a> |
             <a (click)="Delete(element)" class="link-danger text-decoration-none" style="cursor: pointer;">ລົບ</a>
              </td>
         </ng-container>
@@ -161,7 +161,10 @@
       </div>
       <div class="form-label">
         <small class="p-error text-danger" *ngIf="email_exist">ອີເມວນີ້ນຳໃຊ້ແລ້ວ</small>
-        <button type="submit" class="btn btn-primary form-control" [disabled]="Registration.invalid">ລົງທະບຽນ</button>
+        <button type="submit" class="btn btn-primary form-control" [disabled]="Registration.invalid" *ngIf="!btn">ລົງທະບຽນ</button>
+        <button type="button" class="btn btn-primary mt-2 form-control" [disabled]="Registration.invalid" *ngIf="btn" (click)="update()">ແກ້ໄຂ</button>
+
+        <button type="button" class="btn btn-primary mt-2 form-control" *ngIf="btn" (click)="cancel()">ຍົກເລິກ</button>
       </div>
 
     </form>

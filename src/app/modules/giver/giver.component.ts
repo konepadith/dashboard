@@ -19,7 +19,7 @@ export class GiverComponent implements OnInit {
   @ViewChild(MatPaginator,{static:true}) paginator!: MatPaginator;
   @ViewChild(MatTable,{static:true}) table!: MatTable<any>;
   myFiles:any
-
+  btn=false
   Registration:any = FormGroup;
 
   submitted = false;
@@ -182,19 +182,97 @@ export class GiverComponent implements OnInit {
       this.village_data=data
       this.giver_village=''
     }
-    Edit(event:any){
-      // console.log(event.dog_id)
-      this.router.navigate(['giver/giver-edit',event.dog_id])
+
+    onSelectprovince2(province:any){
+      let data=this.districtList.filter((res: { id_province: string; })=>{
+        return res.id_province.toLowerCase().match(province.toLocaleLowerCase())
+      })
+      this.district_data=data
+      this.village_data=null
+      this.giver_district=''
+      this.giver_village=''
+    }
+
+    onSelectdistrict2(district:any){
+      let data=this.villageList.filter((res: { id_district: string; })=>{
+        return res.id_district.toLowerCase().match(district.toLocaleLowerCase())
+      })
+      this.village_data=data
+      this.giver_village=''
+    }
+
+
+
+
+
+
+    update(){
+      const data= new FormData(); //Create Data Store by FormData()
+        Object.entries(this.Registration.value).forEach(([key,value]:any[])=>{
+        data.set(key,value)
+      })
+      this.service.update_giver(data).subscribe(res=>{
+        console.log(res)
+      })
     }
     Delete(event:any){
-      let data={'giver_id':event.dog_id,'dog_status':3}
-      this.service.status_dog_data(data).subscribe(response=>{
-        console.log(response)
-        this.service.dogs_data_info().subscribe(response=>{
-          this.data=response.data
-          this.dataSource = new MatTableDataSource(this.data);
-          this.dataSource.paginator = this.paginator;
-          })
+      // let data={'giver_id':event.dog_id,'dog_status':3}
+      // this.service.status_dog_data(data).subscribe(response=>{
+      //   console.log(response)
+      //   this.service.dogs_data_info().subscribe(response=>{
+      //     this.data=response.data
+      //     this.dataSource = new MatTableDataSource(this.data);
+      //     this.dataSource.paginator = this.paginator;
+      //     })
+      // })
+    }
+    cancel(){
+      this.btn=false
+      this.Registration = this.fb.group({
+        admin_id:[this.admin_info.data[0].admin_id,Validators.required],
+
+        giver_name:        [null,Validators.required],
+        giver_surname:     [null,Validators.required],
+        giver_gender:      [null,Validators.required],
+        image:            [null,Validators.required],
+        giver_email:       [null,Validators.compose([Validators.required,Validators.email])],
+        giver_dob:         [null,Validators.required],
+        giver_village:     [null,Validators.required],
+        giver_district:    [null,Validators.required],
+        giver_province:    [null,Validators.required],
+        giver_workplace:   [null,Validators.required],
+        giver_phoneNumber: [null,Validators.compose([Validators.required,Validators.pattern("^[+][0-9]{10,15}$")])],
       })
+    }
+    edit(data:any){
+      this.btn=true
+      this.Registration = this.fb.group({
+        admin_id:[this.admin_info.data[0].admin_id,Validators.required],
+        giver_id:[data.giver_id,Validators.required],
+        giver_name:        [data.giver_name,Validators.required],
+        giver_surname:     [data.giver_surname,Validators.required],
+        giver_gender:      [data.giver_gender,Validators.required],
+        image:             [''],
+        giver_email:       [data.giver_email,Validators.compose([Validators.required,Validators.email])],
+        giver_dob:         ['',Validators.required],
+        giver_village:     [data.giver_village,Validators.required],
+        giver_district:    [data.giver_district,Validators.required],
+        giver_province:    [data.giver_province,Validators.required],
+        giver_workplace:   [data.giver_workplace,Validators.required],
+        giver_phoneNumber: [data.giver_phoneNumber,Validators.compose([Validators.required,Validators.pattern("^[+][0-9]{10,15}$")])],
+      })
+
+      this.Registration.get('giver_dob').patchValue(this.formatDate(data.giver_dob));
+      this.onSelectprovince2(data.giver_province)
+      this.onSelectdistrict2(data.giver_district)
+    }
+    private formatDate(date:any) {
+      const d = new Date(date);
+      let month = '' + (d.getMonth() + 1);
+      let day = '' + d.getDate();
+      const year = d.getFullYear();
+      if (month.length < 2) month = '0' + month;
+      if (day.length < 2) day = '0' + day;
+      return [year, month, day].join('-');
     }
 }

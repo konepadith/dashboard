@@ -126,6 +126,10 @@ export class DashboardService {
     const url=this.url+'/add_events'
     return this.http.post<any>(url,data)
   }
+  update_event(data:any){
+    const url=this.url+'/update_event'
+    return this.http.post<any>(url,data)
+  }
 
   event_switch(data:any){
     const url=this.url+'/event_switch'
@@ -181,5 +185,13 @@ export class DashboardService {
   report_giver(){
     const url=this.url+'/report_giver'
     return this.http.get<any>(url)
+  }
+  delete_event(event_id:any){
+    const url=this.url+'/delete_event/'
+    return this.http.delete<any>(url+event_id)
+  }
+  update_giver(data:any){
+    const url=this.url+'/update_giver'
+    return this.http.post<any>(url,data)
   }
 }
