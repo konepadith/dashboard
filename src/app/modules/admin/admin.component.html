@@ -1,0 +1,173 @@
+<div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="20px">
+  <div fxFlex="60">
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" #mytable>
+
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>ລຳດັບ</th>
+          <td mat-cell *matCellDef="let element, let i = index"> {{i+1}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>ຊື່</th>
+          <td mat-cell *matCellDef="let element"> {{element.admin_name}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="surname">
+          <th mat-header-cell *matHeaderCellDef>ນາມສະກຸນ </th>
+          <td mat-cell *matCellDef="let element"> {{element.admin_surname }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="address">
+          <th mat-header-cell *matHeaderCellDef>ສະຖາທີ່</th>
+          <td mat-cell *matCellDef="let element" > {{ element.province }}  </td>
+        </ng-container>
+
+        <ng-container matColumnDef="contact">
+          <th mat-header-cell *matHeaderCellDef>ຕິດຕໍ່ </th>
+          <td mat-cell *matCellDef="let element" > {{ element.admin_phoneNumber }}  </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef>ຈັດການ</th>
+          <td mat-cell *matCellDef="let element" class="action-link">
+            <a (click)="edit(element)" class="link-dark text-decoration-none" style="cursor: pointer;">ແກ້ໄຂ</a> |
+            <!-- <a (click)="Delete(element)" class="link-danger text-decoration-none" style="cursor: pointer;">ລົບ</a> -->
+             </td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator [length]="data.length"
+                    [pageSize]="10"
+                     showFirstLastButtons
+                     aria-label="Select page of periodic elements">
+      </mat-paginator>
+    </div>
+
+  </div>
+
+  <div fxFlex="60">
+    <form [formGroup]="Registration" (ngSubmit)="submit_registration()">
+
+      <div class="row">
+        <div class="form-floating col mb-3">
+          <input [ngClass]="{ 'is-invalid':  f.admin_name.invalid && f.admin_name.touched }" type="text" class="form-control" id="admin_name" placeholder="John" name="admin_name" formControlName="admin_name">
+          <label for="admin_name">&nbsp; ຊື່</label>
+          <small class="p-error text-danger" *ngIf="  f.admin_name.hasError('required')&&f.admin_name.invalid && f.admin_name.touched">ຕ້ອງໃສ່ຊື່ກ່ອນ</small>
+        </div>
+
+        <div class="form-floating col mb-3">
+          <input [ngClass]="{'is-invalid':  f.admin_surname.invalid && f.admin_surname.touched }" type="text" class="form-control" id="admin_surname" placeholder="Smith" formControlName="admin_surname">
+          <label for="admin_surname">&nbsp; ນາມສະກຸນ</label>
+          <small class="p-error text-danger" *ngIf=" f.admin_surname.hasError('required') &&f.admin_surname.invalid && f.admin_surname.touched">ຕ້ອງ</small>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class=" form-floating col mb-3">
+          <input [ngClass]="{ 'is-invalid':  f.admin_email.invalid && f.admin_email.touched }" type="email" name="admin_email" id="admin_email" class="form-control" placeholder="name@example.com" formControlName="admin_email">
+          <label for="admin_email">&nbsp; ອີເມວ</label>
+          <small class="p-error text-danger" *ngIf=" f.admin_email.hasError('required') &&f.admin_email.invalid && f.admin_email.touched">ຕ້ອງໃສ່ອີເມວກ່ອນ</small>
+          <small class="p-error text-danger" *ngIf=" f.admin_email.hasError('email') &&f.admin_email.invalid && f.admin_email.touched">ອີເມວບໍ່ຖືກຕ້ອງ</small>
+        </div>
+      </div>
+      <div class="row" *ngIf="!btn">
+        <div class="form-floating col mb-3">
+          <input [ngClass]="{ 'is-invalid':  f.admin_password.invalid && f.admin_password.touched }" type="password" name="admin_password" id="admin_password" class="form-control" placeholder="***" formControlName="admin_password">
+          <label for="admin_password">&nbsp; Password</label>
+          <small class="p-error text-danger" *ngIf="  f.admin_password.hasError('required') &&f.admin_password.invalid && f.admin_password.touched">Password is require</small>
+          <small class="p-error text-danger" *ngIf="  f.admin_password.hasError('minlength') &&f.admin_password.invalid && f.admin_password.touched">Password must be 8</small>
+        </div>
+        <div class="form-floating col mb-3">
+          <input [ngClass]="{ 'is-invalid':  f.confirm_password.invalid && f.confirm_password.touched }" type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="***" formControlName="confirm_password">
+          <label for="confirm_password">&nbsp; Confirm password</label>
+          <small class="p-error text-danger" *ngIf="  f.confirm_password.hasError('required') &&f.confirm_password.invalid && f.confirm_password.touched">Consfirm password is require</small>
+          <small class="p-error text-danger" *ngIf=" f.confirm_password.hasError('MustMatch') &&f.confirm_password.invalid && f.confirm_password.touched">Confirm password didn't Match</small>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-floating col mb-3">
+          <select class="form-select" id="floatingSelect" [ngClass]="{ 'is-invalid':  f.admin_gender.invalid && f.admin_gender.touched }" [(ngModel)]="genderList" formControlName="admin_gender">
+            <option disable seleted hidden value="">ເລືອກເພດ</option>
+            <option value="1">ຊາຍ</option>
+            <option value="2">ຍິງ</option>
+            <option value="3">ອື່ນໆ</option>
+          </select>
+          <label for="floatingSelect">&nbsp; ເພດ</label>
+          <small class="p-error text-danger" *ngIf="  f.admin_gender.hasError('required') &&f.admin_gender.invalid && f.admin_gender.touched">ຕ້ອງເລືອກເພດກ່ອນ</small>
+        </div>
+        <div class="form-floating col mb-3">
+          <input [ngClass]="{ 'is-invalid':  f.admin_dob.invalid && f.admin_dob.touched }" type="date" name="admin_dob" id="admin_dob" class="form-control" formControlName="admin_dob">
+          <label for="admin_dob">&nbsp; ວັນເດືອນປີເກີດ</label>
+          <small class="p-error text-danger" *ngIf="  f.admin_dob.hasError('required') &&f.admin_dob.invalid && f.admin_dob.touched">ຕ້ອງໃສ່ວັນເດືອນປີເກີດກ່ອນ</small>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-floating col mb-3">
+          <select class="form-select" id="admin_province" [ngClass]="{ 'is-invalid':  f.admin_province.invalid && f.admin_province.touched }" ngModel formControlName="admin_province" (change)="onSelectprovince($event)">
+            <option disable seleted hidden value="">ເລືອກແຂວງ</option>
+            <option *ngFor="let item of provinceList" value="{{ item.id_province }}">{{ item.name_lao }}</option>
+          </select>
+          <label for="admin_province">&nbsp; ແຂວງ</label>
+          <small class="p-error text-danger" *ngIf="  f.admin_province.hasError('required') &&f.admin_province.invalid && f.admin_province.touched">ຕ້ອງໃສ່ແຂວງກ່ອນ</small>
+        </div>
+        <div class="form-floating col mb-3">
+          <select class="form-select" id="admin_district" [ngClass]="{ 'is-invalid':  f.admin_district.invalid && f.admin_district.touched }" [(ngModel)]="admin_district" formControlName="admin_district"  (change)="onSelectdistrict($event)">
+            <option disable seleted hidden value="">ເລືອກເມືອງ</option>
+            <option *ngFor="let item of district_data" value="{{ item.id_district }}">{{ item.name_lao }}</option>
+          </select>
+          <label for="admin_district">&nbsp; ເມືອງ</label>
+          <small class="p-error text-danger" *ngIf="  f.admin_district.hasError('required') &&f.admin_district.invalid && f.admin_district.touched">ຕ້ອງເລືອກເມືອງກ່ອນ</small>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-floating col mb-3">
+          <select class="form-select" id="admin_village" [ngClass]="{ 'is-invalid':  f.admin_village.invalid && f.admin_village.touched }" [(ngModel)]="admin_village" formControlName="admin_village" >
+            <option disable seleted hidden value="">ເລືອກບ້ານ</option>
+            <option *ngFor="let item of village_data" value="{{ item.id_village }}">{{ item.name_lao }}</option>
+
+          </select>
+          <label for="admin_village">&nbsp;ບ້ານ</label>
+          <small class="p-error text-danger" *ngIf="  f.admin_village.hasError('required') &&f.admin_village.invalid && f.admin_village.touched">ຕ້ອງເລືອກບ້ານກ່ອນ</small>
+        </div>
+        <div class=" col mb-3">
+          <label for="floatingSelect">&nbsp; ຮູບ</label>
+          <input [ngClass]="{'is-invalid':  f.image.invalid && f.image.touched }" type="file" class="form-control form-control-sm" id="Image" placeholder="Smith" formControlName="image" (change)="onFIleSelect($event , 'image')">
+          <small class="p-error text-danger" *ngIf=" f.image.hasError('required') &&f.image.invalid && f.image.touched">ຕ້ອງເລືອກຮູບກ່ອນ</small>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-floating col mb-3">
+          <input [ngClass]="{ 'is-invalid':  f.admin_workplace.invalid && f.admin_workplace.touched }" type="text" class="form-control" id="admin_workplace" placeholder="Your Company" name="admin_workplace" formControlName="admin_workplace">
+          <label for="admin_workplace">&nbsp; ສະຖານທີ່ເຮັດວຽກ</label>
+          <small class="p-error text-danger" *ngIf="  f.admin_workplace.hasError('required')&&f.admin_workplace.invalid && f.admin_workplace.touched">ຕ່້ອງໃສ່ສະຖານທີ່ເຮັດວຽກກ່ອນ
+          </small>
+        </div>
+
+        <div class="form-floating col mb-3">
+          <input [ngClass]="{'is-invalid':  f.admin_phoneNumber.invalid && f.admin_phoneNumber.touched }" type="text" class="form-control" id="admin_phoneNumber" placeholder="Phone Number 20540XXXXXX" formControlName="admin_phoneNumber">
+          <label for="admin_phoneNumber">&nbsp; ເບີໂທລະສັບ</label>
+          <small class="p-error text-danger" *ngIf=" f.admin_phoneNumber.hasError('required') &&f.admin_phoneNumber.invalid && f.admin_phoneNumber.touched">ຕ້ອງໃສ່ເບີໂທລະສັບກ່ອນ</small>
+          <small class="p-error text-danger" *ngIf=" f.admin_phoneNumber.hasError('pattern') &&f.admin_phoneNumber.invalid && f.admin_phoneNumber.touched">ເບີບໍ່ຖືກຕ້ອງ</small>
+        </div>
+      </div>
+      <div class="form-label">
+        <small class="p-error text-danger" *ngIf="email_exist">ອີເມວນີ້ນຳໃຊ້ແລ້ວ</small>
+        <button type="submit" class="btn btn-primary form-control" [disabled]="Registration.invalid" *ngIf="!btn">ລົງທະບຽນ</button>
+        <button type="button" class="btn btn-primary mt-2 form-control" [disabled]="Registration.invalid" *ngIf="btn" (click)="update()">ແກ້ໄຂ</button>
+
+        <button type="button" class="btn btn-primary mt-2 form-control" *ngIf="btn" (click)="cancel()">ຍົກເລິກ</button>
+      </div>
+
+    </form>
+  </div>
+
+</div>

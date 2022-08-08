@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
-
+  admin_info=JSON.parse(localStorage.getItem("user") || "[]")
   constructor(private router:Router) { }
 
   ngOnInit(): void {

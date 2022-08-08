@@ -36,6 +36,8 @@ import { ReportGiverComponent } from 'src/app/modules/report/report-giver/report
 import { ReportUserComponent } from 'src/app/modules/report/report-user/report-user.component';
 import { ReportFormComponent } from 'src/app/modules/report/report-form/report-form.component';
 
+import { AdminComponent } from 'src/app/modules/admin/admin.component';
+
 @NgModule({
   declarations: [
     DefaultComponent,
@@ -56,6 +58,7 @@ import { ReportFormComponent } from 'src/app/modules/report/report-form/report-f
     ReportDonateComponent,
     ReportGiverComponent,
     ReportFormComponent,
+    AdminComponent,
   ],
   imports: [
     CommonModule,

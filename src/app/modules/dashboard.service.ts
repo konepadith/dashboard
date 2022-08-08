@@ -194,4 +194,16 @@ export class DashboardService {
     const url=this.url+'/update_giver'
     return this.http.post<any>(url,data)
   }
+  update_admin(data:any){
+    const url=this.url+'/update_admin'
+    return this.http.post<any>(url,data)
+  }
+  add_admin_data(data:any){
+    const url=this.url+'/add_admin_data'
+    return this.http.post<any>(url,data)
+  }
+  admin_data(){
+    const url=this.url+'/admin_data'
+    return this.http.get<any>(url)
+  }
 }

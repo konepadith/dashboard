@@ -2,6 +2,7 @@ import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guard/auth.guard';
 import { DefaultComponent } from './layouts/default/default.component';
+import { AdminComponent } from './modules/admin/admin.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { DogEditComponent } from './modules/dogs/dog-edit/dog-edit.component';
 import { DogRecoveryComponent } from './modules/dogs/dog-recovery/dog-recovery.component';
@@ -57,6 +58,9 @@ const routes: Routes = [{
   {
     path:'report',
     component:ReportComponent
+  },{
+    path:'admin',
+    component:AdminComponent
   }
   ]},
   {path:'login',

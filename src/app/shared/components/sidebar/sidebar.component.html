@@ -1,10 +1,10 @@
 <mat-nav-list>
   <div class="profile-card">
     <div class="header">
-      <h3>Kone Spydee</h3>
-      <h4>example@gmail.com</h4>
+      <h3>{{this.admin_info.data[0].admin_name}} {{this.admin_info.data[0].admin_surname}}</h3>
+      <h4>{{this.admin_info.data[0].admin_email}}</h4>
     </div>
-    <img src="../../../../assets/images/Sir_Tim_Berners-Lee_(cropped).jpg" alt="kone spydee">
+    <img src="{{admin_info.data[0].admin_img}}" alt="kone spydee">
   </div>
   <mat-divider></mat-divider>
 
@@ -12,6 +12,7 @@
 
   <a mat-list-item routerLinkActive="router-link-active" routerLink="/">ໜ້າຈັດການ</a>
   <a mat-list-item routerLinkActive="router-link-active" routerLink="/posts">ກິດຈະກຳ</a>
+  <a mat-list-item routerLinkActive="router-link-active" routerLink="/admin" *ngIf="this.admin_info.data[0].admin_email =='konepadithspydee@gmail.com'">ຈັດການຜູ້ດູແລລະບົບ</a>
   <a mat-list-item routerLinkActive="router-link-active" routerLink="/mail">ອີເມວ</a>
   <a mat-list-item routerLinkActive="router-link-active" routerLink="/form">ຈັດການຟອມ</a>
   <a mat-list-item routerLinkActive="router-link-active" routerLink="/dogs">ໝາ</a>
@@ -23,7 +24,7 @@
 
   <h2 matSubheader>ເຄື່ອງມື</h2>
 
-  <a mat-list-item routerLinkActive="router-link-active" routerLink="/contacts">
+  <!-- <a mat-list-item routerLinkActive="router-link-active" routerLink="/contacts">
     <mat-icon>import_contacts</mat-icon>
     ຕິດຕໍ່
   </a>
@@ -31,7 +32,7 @@
   <a mat-list-item routerLinkActive="router-link-active" routerLink="/contacts">
     <mat-icon>phone</mat-icon>
     ໂທ
-  </a>
+  </a> -->
   <button class="btn btn-secondary" (click)="logout()">Log out</button>
 
 </mat-nav-list>
