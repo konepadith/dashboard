@@ -211,8 +211,51 @@ export class GiverComponent implements OnInit {
         Object.entries(this.Registration.value).forEach(([key,value]:any[])=>{
         data.set(key,value)
       })
-      this.service.update_giver(data).subscribe(res=>{
-        console.log(res)
+      this.service.update_giver(data).subscribe(response=>{
+        console.log(response)
+        if (response.status ==0 ) {
+          this.email_exist=true
+          Swal.fire({
+            icon: 'error',
+            title: 'Email is already exist',
+            text: 'Try other email',
+            })
+        }else if (response.error == true) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Sonething went wrong',
+            text: 'Please contact supporter',
+            })
+        }
+        else {
+          Swal.fire({
+            icon: 'success',
+            title: 'UPDATE',
+            text: 'Member Update',
+            }).then(()=>{
+              this.service.giver_data().subscribe(response=>{
+                this.data=response.data
+                this.dataSource = new MatTableDataSource(this.data);
+                this.dataSource.paginator = this.paginator;
+                })
+                this.Registration = this.fb.group({
+                  admin_id:[this.admin_info.data[0].admin_id,Validators.required],
+                  giver_name:        [null,Validators.required],
+                  giver_surname:     [null,Validators.required],
+                  giver_gender:      [null,Validators.required],
+                  // giver_password:    [null,Validators.compose([Validators.required,Validators.minLength(8)])],
+                  // confirm_password: [null,Validators.compose([Validators.required])],
+                  image:            [null,Validators.required],
+                  giver_email:       [null,Validators.compose([Validators.required,Validators.email])],
+                  giver_dob:         [null,Validators.required],
+                  giver_village:     [null,Validators.required],
+                  giver_district:    [null,Validators.required],
+                  giver_province:    [null,Validators.required],
+                  giver_workplace:   [null,Validators.required],
+                  giver_phoneNumber: [null,Validators.compose([Validators.required,Validators.pattern("^[+][0-9]{10,15}$")])],
+                })
+            })
+        }
       })
     }
     Delete(event:any){
