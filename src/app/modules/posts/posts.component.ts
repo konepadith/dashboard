@@ -42,7 +42,7 @@ export class PostsComponent implements OnInit {
       event_end:    [null,Validators.required],
       event_place:         [null,Validators.required],
       event_direction:         [null,Validators.required],
-      event_status:    [null,Validators.required],
+      // event_status:    [null,Validators.required],
     })
 
     this.service.events_data_adm().subscribe(response=>{

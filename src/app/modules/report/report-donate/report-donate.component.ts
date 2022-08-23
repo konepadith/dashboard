@@ -51,7 +51,7 @@ export class ReportDonateComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       })
   }
-  exportExcel() {
+  exportExcel1() {
     //add code below when you would like to use Exceljs to tsconfig.app.json
     // "type":[
     //   "node"
@@ -59,73 +59,77 @@ export class ReportDonateComponent implements OnInit {
     let workbook = new Workbook();
     let worksheet = workbook.addWorksheet('DogReport');
     worksheet.columns = [
-      { header: 'Form ID'            , key: 'form_id',                  width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'User ID'         , key: 'user_id',                width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'user Email'         , key: 'user_email',             width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'admin ID'          , key: 'admin_id',                 width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'Admin Email'           , key: 'admin_email',               width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'Dog ID'        , key: 'dog_id',              width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'Dog Name'       , key: 'dog_name',         width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'Form Status'       , key: 'form_status',         width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'Question 1'    , key: 'q_1',            width: 10, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'Question 2'    , key: 'q_2',            width: 10, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'Question 3'    , key: 'q_3',            width: 10, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'Question 4'    , key: 'q_4',            width: 10, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'Question 5'    , key: 'q_5',            width: 10, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'Question 6'    , key: 'q_6',            width: 10, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'Question 7'    , key: 'q_7',            width: 10, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'Question 8'    , key: 'q_8',            width: 10, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'Question 9'    , key: 'q_9',            width: 10, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'Question 10'    , key: 'q_10',            width: 10, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'Question 11'    , key: 'q_11',            width: 10, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'Question 12'    , key: 'q_12',            width: 10, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'Question 13'    , key: 'q_13',            width: 10, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'Question 14'    , key: 'q_14',            width: 10, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'Question 15'    , key: 'q_15',            width: 10, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'Question 16'    , key: 'q_16',            width: 10, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'Question 17'    , key: 'q_17',            width: 10, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'Question 18'    , key: 'q_18',            width: 10, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'Question 19'    , key: 'q_19',            width: 10, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'Create record' , key: 'form_create_at',            width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'update recored', key: 'form_update_at',            width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'donate ID'            , key: 'donate_id',                  width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'User ID'            , key: 'user_id',                  width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'User Name'            , key: 'user_name',                  width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'User Email'         , key: 'user_email',                width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'Donate price'         , key: 'donate_price',             width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'Donate Bill'          , key: 'donate_bill',                 width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'Donate For'           , key: 'donate_for',               width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'Create record' , key: 'donate_create_at',            width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'update recored', key: 'donate_update_at',            width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
     ];
 this.data.forEach((e:any) => {
   worksheet.addRow({
-    form_id                :      e.form_id,
+    donate_id                :      e.donate_id,
     user_id       :      e.user_id,
-    user_email       :      e.user_email ,
-  admin_id           :      e.admin_id,
-  admin_email        :      e.admin_email,
-  dog_id       :      e.dog_id  ,
-  dog_name            :      e.dog_name,
-  form_status               :     e.form_status ,
-      q_1       : e.q_1,
-    q_2       : e.q_2,
-    q_3       : e.q_3,
-    q_4       : e.q_4,
-    q_5       : e.q_5,
-    q_6       : e.q_6,
-    q_7       : e.q_7,
-    q_8       : e.q_8,
-    q_9       : e.q_9,
-    q_10      : e.q_10,
-    q_11      : e.q_11,
-    q_12      : e.q_12,
-    q_13      : e.q_13,
-    q_14      : e.q_14,
-    q_15      : e.q_15,
-    q_16      : e.q_16,
-    q_17      : e.q_17,
-    q_18      : e.q_18,
-    q_19      : e.q_19,
-    form_create_at     :     moment(e.user_create_at).format("DD/MM/yyyy").toString(),
-    form_update_at     :      moment(e.user_update_at).format("DD/MM/yyyy").toString(),
+    user_name       :      e.user_name ,
+    user_email           :      e.user_email,
+    donate_price        :      e.donate_price,
+    donate_bill       :      e.donate_bill  ,
+    donate_for            :      e.donate_for,
+    donate_create_at     :     moment(e.donate_create_at).format("DD/MM/yyyy").toString(),
+    donate_update_at     :      moment(e.donate_update_at).format("DD/MM/yyyy").toString(),
    },"n");
 
 });
     workbook.xlsx.writeBuffer().then((data) => {
       let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-      fs.saveAs(blob, 'dogs.xlsx');
+      fs.saveAs(blob, 'donate.xlsx');
+    })
+
+  }
+
+  exportExcel2() {
+    //add code below when you would like to use Exceljs to tsconfig.app.json
+    // "type":[
+    //   "node"
+    // ]
+    let workbook = new Workbook();
+    let worksheet = workbook.addWorksheet('DogReport');
+    worksheet.columns = [
+      { header: 'donate ID'            , key: 'donate_cash_id',                  width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'Admin ID'            , key: 'admin_id',                  width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'Admin Email'         , key: 'admin_email',                width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'User Name'            , key: 'name',                  width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'User email'            , key: 'email',                  width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'User dob'            , key: 'dob',                  width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'Donate price'         , key: 'donate_cash_price',             width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'Donate Bill'          , key: 'donate_cash_bill',                 width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'Donate For'           , key: 'donate_cash_for',               width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'Create record' , key: 'donate_cash_create_at',            width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'update recored', key: 'donate_cash_update_at',            width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+    ];
+this.data2.forEach((e:any) => {
+  worksheet.addRow({
+    donate_cash_id                :      e.donate_cash_id,
+    admin_id       :      e.admin_id,
+    admin_email       :      e.admin_email ,
+    name           :      e.name,
+    email        :      e.email,
+    dob       :      e.dob  ,
+    donate_cash_price            :      e.donate_cash_price,
+    donate_for            :      e.donate_for,
+    donate_cash_bill            :      e.donate_cash_bill,
+    donate_cash_for            :      e.donate_cash_for,
+    donate_cash_create_at     :     moment(e.donate_cash_create_at).format("DD/MM/yyyy").toString(),
+    donate_cash_update_at     :      moment(e.donate_cash_update_at).format("DD/MM/yyyy").toString(),
+   },"n");
+
+});
+    workbook.xlsx.writeBuffer().then((data) => {
+      let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+      fs.saveAs(blob, 'doantecash.xlsx');
     })
 
   }

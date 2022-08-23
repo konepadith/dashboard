@@ -39,46 +39,54 @@ export class ReportGiverComponent implements OnInit {
     let workbook = new Workbook();
     let worksheet = workbook.addWorksheet('DogReport');
     worksheet.columns = [
-      { header: 'Form ID'            , key: 'user_id',                  width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'User ID'         , key: 'user_id',                width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'user Email'         , key: 'user_email',             width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'admin ID'          , key: 'admin_id',                 width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'Admin Email'           , key: 'admin_email',               width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'Dog ID'        , key: 'dog_id',              width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'Dog Name'       , key: 'dog_name',         width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'Question 1'    , key: 'q_1',            width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'district code'      , key: 'user_district',            width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'village code'        , key: 'user_village',             width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'province'    , key: 'province',                 width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'district'           , key: 'district',                 width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'village'        , key: 'village',                  width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'Create record' , key: 'user_create_at',            width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
-      { header: 'update recored', key: 'user_update_at',            width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'Giver ID'            , key: 'giver_id',                  width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'Admin ID'         , key: 'admin_id',                width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'giver img'         , key: 'giver_img',             width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'giver name'          , key: 'giver_name',                 width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'giver surname'           , key: 'giver_surname',               width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'giver dob'        , key: 'giver_dob',              width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'code village'       , key: 'giver_village',         width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'code district'    , key: 'giver_district',            width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'code province'      , key: 'giver_province',            width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'giver phoneNumber'        , key: 'giver_phoneNumber',             width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'giver email'    , key: 'giver_email',                 width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'giver gender'           , key: 'giver_gender',                 width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'giver workplace'        , key: 'giver_workplace',                  width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'village'           , key: 'village',                 width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'distict'        , key: 'district',                  width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'province'           , key: 'province',                 width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'dog_name'        , key: 'dog_name',                  width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'Create record' , key: 'giver_create_at',            width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
+      { header: 'update recored', key: 'giver_update_at',            width: 18, style: { font: { name: 'phetsarath OT', size:12} } },
     ];
 
 this.data.forEach((e:any) => {
   worksheet.addRow({Appointment_date: moment(e.Appointment_date).format("DD/MM/yyyy").toString(),
-  user_id                :      e.user_id,
-  user_name       :      e.user_name,
-  user_surname       :      e.user_surname ,
-  user_dob          :      moment(e.user_dob).format("DD/MM/yyyy").toString(),
-  user_email           :      e.user_email,
-  user_gender        :      this.user_gender(e.user_gender),
-  user_phoneNumber       :      e.user_phoneNumber  ,
-  user_province            :      e.user_province,
-  user_district               :      e.user_district,
-  user_village        :      e.user_village,
-  province            :      e.province,
+  giver_id                :      e.giver_id,
+  admin_id       :      e.admin_id,
+  giver_img       :      e.giver_img ,
+  giver_dob          :      moment(e.giver_dob).format("DD/MM/yyyy").toString(),
+  giver_name           :      e.giver_name,
+  giver_gender        :      this.user_gender(e.giver_gender),
+  giver_surname       :      e.giver_surname  ,
+  giver_village            :      e.giver_village,
+  giver_district               :      e.giver_district,
+  giver_province        :      e.giver_province,
+  giver_phoneNumber            :      e.giver_phoneNumber,
+  giver_email               :      e.giver_email,
+  giver_workplace        :      e.giver_workplace,
+  village            :      e.village,
   district               :      e.district,
-  village        :      e.village,
-  user_create_at     :     moment(e.user_create_at).format("DD/MM/yyyy").toString(),
-  user_update_at     :      moment(e.user_update_at).format("DD/MM/yyyy").toString(),
+  province        :      e.province,
+  dog_name            :      e.dog_name,
+  giver_create_at     :     moment(e.giver_create_at).format("DD/MM/yyyy").toString(),
+  giver_update_at     :      moment(e.giver_update_at).format("DD/MM/yyyy").toString(),
    },"n");
 
 });
     workbook.xlsx.writeBuffer().then((data) => {
       let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-      fs.saveAs(blob, 'dogs.xlsx');
+      fs.saveAs(blob, 'giver.xlsx');
     })
 
   }

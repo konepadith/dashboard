@@ -13,7 +13,7 @@
     <button type="button" class="btn btn-outline-dark ms-2" (click)="report('3')">ຮັບລ້ຽງສຳເລັດ</button>
       </div> -->
       <p class="text-start h5">ລວມຢອດເງິນທັງໝົດ {{DonateSum(this.data) | number}}</p>
-      <div class="col text-end"><button type="button" class="btn btn-outline-danger ms-1" (click)="exportExcel()">Export</button></div>
+      <div class="col text-end"><button type="button" class="btn btn-outline-danger ms-1" (click)="exportExcel1()">Export</button></div>
     </div>
     <div class="pt-5">
       <table mat-table [dataSource]="dataSource" #mytable>
@@ -63,7 +63,7 @@
     <button type="button" class="btn btn-outline-dark ms-2" (click)="report('3')">ຮັບລ້ຽງສຳເລັດ</button>
       </div> -->
       <p class="text-start h5">ລວມຢອດເງິນທັງໝົດ {{DonateSum2(this.data2) | number}}</p>
-      <div class="col text-end"><button type="button" class="btn btn-outline-danger ms-1" (click)="exportExcel()">Export</button></div>
+      <div class="col text-end"><button type="button" class="btn btn-outline-danger ms-1" (click)="exportExcel2()">Export</button></div>
     </div>
     <div class="pt-5">
       <table mat-table [dataSource]="dataSource2" #mytable>
